@@ -67,7 +67,7 @@ fun main(args: Array<String>) {
 
 ## 4-1D: `if-else` that returns a value
 
-If you don't need multiple lines in a block (and just a single line), you can shorthand this in a single line without curly brackets `{ }`.
+If you don't need multiple lines in a block, you can shorthand this in a single line without curly brackets `{ }`.
 
 ```kotlin
 fun main(args: Array<String>) {
@@ -82,7 +82,7 @@ fun main(args: Array<String>) {
 
 ## 4-1D: "AND"
 
-You can combine conditions using the "and" `&&` operator, which joins several conditions together and requires all of themm to be `true` to yield `true`. Below we check for sleet conditions, which must have rain present and a temperature less than 32 degrees to occur.
+You can combine conditions using the "and" `&&` operator, which joins several conditions together and requires all of them to be `true`. Below we check for sleet conditions, which must have rain present and a temperature less than 32 degrees to occur.
 
 
 ```kotlin
@@ -92,7 +92,7 @@ fun main(args: Array<String>) {
     val temperature = 31
 
     if (isRain && temperature < 32) {
-        println("Freezing sleet today!")
+        println("FORECAST: Freezing sleet")
     }
 }
 ```
@@ -109,19 +109,19 @@ fun main(args: Array<String>) {
 
     val snowFall = 12
     if (snowFall > 0 || (isRain && temperature < 32)) {
-        println("Freezing sleet or snow today!")
+        println("FORECAST: Freezing sleet or snow")
     }
 }
 ```
 
 # 4-2: `when` Expressions
 
-A `when` expression is a more flexible alternative to `if` that allows you to specify multliple conditions mapped to resulting values.
+A `when` expression is a more flexible alternative to `if` that allows you to specify multiple conditions mapped to resulting values.
 
 
 ## 4-2A: Measuring Wind Speed
 
-Below we map different conditions to different `println` actions to categorize a wind speed.This simply returns a `Unit`.
+Below we map different conditions to different `println` actions (each which return `Unit`) to categorize a wind speed.
 
 ```kotlin
 fun main(args: Array<String>) {
@@ -187,13 +187,15 @@ fun main(args: Array<String>) {
 
 # 4-3 Classes
 
-Object-oriented programming and classes have often been shunned in data science, primarily because they traditionally require a lot of boilerplate code and reduce flexibility. This is not the case with Kotlin. Classes are a powerful tool in expressing data models, especially with data classes which are an effective substitute for tuples.
+Object-oriented programming and classes have often been overlooked in data science, primarily because they traditionally require a lot of boilerplate code and reduce flexibility. This is not the case with Kotlin. Classes are a powerful tool in expressing business domains, especially with data classes which are an effective substitute for tuples.
 
-Currently, classes don't provide direct means to translate to matrices and other tabular data structures essential for machine learning and other advanced modeling tasks. But classes provide a way of keeping data structures well organized, and it's not much effort to fluently convert a class into a vector/matrix that works with data science libraries. This will be covered much later.
+Currently, classes don't provide direct means to translate to matrices and other tabular data structures essential for machine learning. But classes provide a way of keeping business domain code well organized, and it's not much effort to fluently convert a class into a vector/matrix that works with data science libraries. This will be covered in _Practical Data Modeling for Production, with Kotlin_.
 
 ## 4-3A: A Basic Class
 
-A class is an entity that is used to create instances of objects, which can be used to model things in the real world. For instance, we can create a `Patient` class that holds `firstName`, `lastName`, and `birthday` properties (each type must be explicitly declared, with a `val` or `var` key word just like variables). We can use this to create several patients with these properties.
+A class is an entity that is used to create instances of objects, which can be used to model things in the real world. For instance, we can create a `Patient` class that holds `firstName`, `lastName`, and `birthday` properties. Each type must be explicitly declared, with a `val` or `var` keyword just like variables. We can use this to create several patients with these properties.
+
+Note you can also provide the properties as named parameters, just like functions.
 
 ```kotlin
 import java.time.LocalDate
@@ -203,7 +205,7 @@ fun main(args: Array<String>) {
     val firstPatient = Patient("Elena", "Patterson", LocalDate.of(1985, 1, 4))
     println("First patient is ${firstPatient.firstName} ${firstPatient.lastName}")
 
-    val secondPatient = Patient("John", "Payne", LocalDate.of(1981, 6, 11))
+    val secondPatient = Patient(firstName="John", lastName="Payne", birthday=LocalDate.of(1981, 6, 11))
     println("Second patient is ${secondPatient.firstName} ${secondPatient.lastName}")
 }
 
@@ -212,7 +214,7 @@ class Patient(val firstName: String, val lastName: String, val birthday: LocalDa
 
 ## 4-3B: Putting functions in a class
 
-It is possible to add functions to a class which can use the properties (or other logic in your project) to produce interesting calculations. Below, we add a `getAge()` function to the `Patient` class which returns the patient's age.
+It is possible to add functions to a class which can use the properties (or other code in your project) to produce helpful calculations. Below, we add a `getAge()` function to the `Patient` class which returns the patient's age.
 
 ```kotlin
 import java.time.LocalDate
@@ -235,7 +237,7 @@ Everything we learned about functions from the last section can be applied to fu
 
 ## 4-3B: Putting Derived Properties in a class
 
-However, the above example could be done better. Functions are often used when you expect parameters could be provided. If we are simply calculating an attribute based on no parameters at all about the item, we can express a "derived property" like so:
+However, the above example could be improved by using a derived property instead. Functions are often used when you expect parameters could be provided. If we are simply calculating an attribute based on no parameters at all about the item, we can express a "derived property" like so:
 
 ```kotlin
 import java.time.LocalDate
@@ -254,7 +256,7 @@ class Patient(val firstName: String, val lastName: String, val birthday: LocalDa
 }
 ```
 
-`get()` will calculate the value every time it is called. You can omit the `get()` keyword and this will calculate and persist the value once. This can be good if the value is expensive to calculate, but then it also takes up memory.
+`get()` will calculate the value every time it is called. If you omit the `get()` keyword, this will calculate and persist the value once. This can be good if the value is expensive to calculate, but then it takes up memory.
 
 ```kotlin
 import java.time.LocalDate
@@ -303,7 +305,7 @@ The `data class` sports the following features:
 * A `copy()` function that allows you to create new objects off the old one, and change certain properties.
 * `componentN()` functions that numerically correspond to each property.
 
-Here is a demonstration of equality. Again, the properties in the primary constructor (where the provided properties are held) are what drives the equality.
+Here is a demonstration of equality. Again, the properties in the primary constructor (where the provided properties are held) drive the data class features, including equality.
 
 ```kotlin
 import java.time.LocalDate
@@ -352,7 +354,7 @@ data class Patient(val firstName: String, val lastName: String, val birthday: Lo
 }
 ```
 
-This copy-and-modify patterns maintains immutability, which is preferable and can help prevent bugs.
+This copy-and-modify patterns maintains immutability, which is preferable and can help prevent accidental mutations.
 
 # 4-5 Leveraging Initializers
 
@@ -386,7 +388,7 @@ data class Vehicle(val make: String,
 
 # 4-6 Singletons
 
-Sometimes we want to only have a single instance of a given class and make it accessible everywhere. We can do this using the `object` keyword instead of `class`, and it will have all the features of a class other than its restricted to a single instance.
+Sometimes we want to only have a single instance of a given class and make it easily accessible everywhere. We can do this using the `object` keyword instead of `class`, and it will have all the features of a class other than its restricted to a single instance.
 
 For instance, we may set universal arguments for some business parameters, like model constants. Here, we create a `ModelArguments` object that contains two mutable properties that can be reassigned at any time.
 
@@ -411,32 +413,5 @@ object ModelArguments {
 
     fun meetsTarget(accuracy: Double) = accuracy >= targetAccuracy
     fun meetsMinimum(accuracy: Double) = accuracy >= minimumAccuracy
-}
-```
-
-Of course, you can also make `ModelArguments` a class that can be used to create several instances. This may be preferred, but sometimes it is convenient to have one central place to store things.
-
-
-```kotlin
-fun main(args: Array<String>) {
-
-    val modelArgs = ModelArguments()
-
-    modelArgs.minimumAccuracy = .20
-    modelArgs.targetAccuracy = .60
-
-    val correctPredictions = 205
-    val totalPredictions =  500
-
-    val accuracy = correctPredictions.toDouble() / totalPredictions.toDouble()
-
-    println(modelArgs.meetsTarget(accuracy))
-}
-
-class ModelArguments {
-    var minimumAccuracy = 0.0
-    var targetAccuracy = 0.0
-
-    fun meetsTarget(accuracy: Double) = accuracy >= targetAccuracy
 }
 ```
