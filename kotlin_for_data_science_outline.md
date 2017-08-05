@@ -30,6 +30,7 @@ PART 1: From Data Science to Production, with Kotlin: The Basics
 * Singletons
 
 5) Collections
+* Ranges and loops
 * Arrays
 * Lists
 * Sets

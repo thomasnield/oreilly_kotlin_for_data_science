@@ -174,9 +174,9 @@ fun main(args: Array<String>) {
 
     // evaluate wind speed category
     val windSeverity = when {
-        windSpeed > 40 -> "HIGH"
-        windSpeed > 30 -> "MODERATE"
-        windSpeed > 0 -> "LOW"
+        windSpeed >= 40 -> "HIGH"
+        windSpeed >= 30 -> "MODERATE"
+        windSpeed >= 0 -> "LOW"
         else -> throw Exception("Wind speed must be positive!")
     }
 
@@ -189,11 +189,11 @@ fun main(args: Array<String>) {
 
 Object-oriented programming and classes have often been overlooked in data science, primarily because they traditionally require a lot of boilerplate code and reduce flexibility. This is not the case with Kotlin. Classes are a powerful tool in expressing business domains, especially with data classes which are an effective substitute for tuples.
 
-Currently, classes don't provide direct means to translate to matrices and other tabular data structures essential for machine learning. But classes provide a way of keeping business domain code well organized, and it's not much effort to fluently convert a class into a vector/matrix that works with data science libraries. This will be covered in _Practical Data Modeling for Production, with Kotlin_.
+Currently, classes don't provide direct means to translate to matrices and other tabular data structures essential for learning tasks. But classes provide a way of keeping business domain code well organized, and it's not much effort to fluently convert a class into a vector/matrix that works with data science libraries. This will be covered in _Practical Data Modeling for Production, with Kotlin_.
 
 ## 4-3A: A Basic Class
 
-A class is an entity that is used to create instances of objects, which can be used to model things in the real world. For instance, we can create a `Patient` class that holds `firstName`, `lastName`, and `birthday` properties. Each type must be explicitly declared, with a `val` or `var` keyword just like variables. We can use this to create several patients with these properties.
+A class is an entity that is used to create instances of objects, which can be used to model things in our world. For instance, we can create a `Patient` class that holds `firstName`, `lastName`, and `birthday` properties. Each type must be explicitly declared, with a `val` or `var` keyword just like variables. We can use this to create several patients with these properties.
 
 Note you can also provide the properties as named parameters, just like functions.
 
@@ -245,9 +245,9 @@ import java.time.temporal.ChronoUnit
 
 fun main(args: Array<String>) {
 
-    val firstPatient = Patient("Elena", "Patterson", LocalDate.of(1985, 1, 4))
+    val patient = Patient("Elena", "Patterson", LocalDate.of(1985, 1, 4))
 
-    println("${firstPatient.firstName}'s age is ${firstPatient.age}")
+    println("${patient.firstName}'s age is ${patient.age}")
 }
 
 class Patient(val firstName: String, val lastName: String, val birthday: LocalDate) {
@@ -264,9 +264,9 @@ import java.time.temporal.ChronoUnit
 
 fun main(args: Array<String>) {
 
-    val firstPatient = Patient("Elena", "Patterson", LocalDate.of(1985, 1, 4))
+    val patient = Patient("Elena", "Patterson", LocalDate.of(1985, 1, 4))
 
-    println("${firstPatient.firstName}'s age is ${firstPatient.age}")
+    println("${patient.firstName}'s age is ${patient.age}")
 }
 
 class Patient(val firstName: String, val lastName: String, val birthday: LocalDate) {
@@ -287,9 +287,9 @@ import java.time.temporal.ChronoUnit
 
 fun main(args: Array<String>) {
 
-    val firstPatient = Patient("Elena", "Patterson", LocalDate.of(1985, 1, 4))
+    val patient = Patient("Elena", "Patterson", LocalDate.of(1985, 1, 4))
 
-    println(firstPatient)
+    println(patient)
 }
 
 data class Patient(val firstName: String, val lastName: String, val birthday: LocalDate) {
@@ -340,11 +340,11 @@ import java.time.temporal.ChronoUnit
 
 fun main(args: Array<String>) {
 
-    val firstPatient = Patient("Elena", "Patterson", LocalDate.of(1985, 1, 4))
+    val patient = Patient("Elena", "Patterson", LocalDate.of(1985, 1, 4))
 
-    val modifiedPatient = firstPatient.copy(lastName = "Connors")
+    val modifiedPatient = patient.copy(lastName = "Connors")
 
-    println(firstPatient)
+    println(patient)
     println(modifiedPatient)
 }
 
