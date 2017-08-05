@@ -487,3 +487,12 @@ fun main(args: Array<String>) {
     println(length)
 }
 ```
+
+# 3.7 Project Organization
+
+Cover the following:
+
+* Files and packages
+* CTRL + Q to see object types
+* CTRL + B to jump to declaration
+* SHIFT + F6 to rename

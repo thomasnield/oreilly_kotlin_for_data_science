@@ -259,7 +259,84 @@ fun main(args: Array<String>) {
 }
 ```
 
+# 5.5 Collection operators
 
-# 5.5 Maps
+There are many convenient collection operators that allow you to work with and transform collections easily. In _Practical Data Modeling for Production with Kotlin_, we will cover Sequences which can unlock further efficiency in transforming and loading data. But for now we will stick with the collection operators.
+
+
+## 5.5A forEach()
+
+In Kotlin, you can pass _lambda arguments_ to some functions (known as higher-order functions) to quickly pass a behavior as an argument. We will dissect what this means in more detail in the next video, but for now just know it can quickly specify an instruction on what to do with each element in a collection.
+
+For instance, rather than using a loop to print each item in a `List`, `Array`, `Set`, or `Map`, we can simply call the `forEach()` function and pass a lambda argument saying to print each item (referred to as `it`).
+
+
+```kotlin
+fun main(args: Array<String>) {
+
+    val strings = listOf("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot")
+
+    strings.forEach { println(it) }
+}
+```
+
+As you start using these kinds of functions, you will find loops become a rarity in your daily work.
+
+
+## 5.5B Mapping to Lengths
+
+Below, we quickly turn a `List<String>` into a `List<Int>` by calling the `map()` function and pass a lambda argument mapping each String to its length.
+
+```kotlin
+fun main(args: Array<String>) {
+
+    val strings = listOf("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot")
+
+    val lengths = strings.map { it.length }
+
+    lengths.forEach { println(it) }
+}
+```
+
+
+## 5.5C Filtering
+
+
+We can also filter items that meet a condition into a new `List`. For instance, we can derive a new List that only contains Strings greater than 5 characters in length.
+
+
+```kotlin
+fun main(args: Array<String>) {
+
+    val strings = listOf("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot")
+
+    val filteredStrings = strings.filter { it.length > 5 }
+
+    filteredStrings.forEach { println(it) }
+}
+```
+
+## 5.5D Getting Distinct Letters from All Strings
+
+In the below example, we derive all the distinct letters from our six Strings. We use `flatMap()` to break up into a `List` of all the characters, and then `filter()` to remove any empty characters. Finally we use `map()` to make all letters uppercase and then use `distinct()` to get the distinct letters.
+
+
+```kotlin
+fun main(args: Array<String>) {
+
+    val strings = listOf("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot")
+
+    val distinctLetters = strings.flatMap { it.split("") }
+            .filter { it.trim() != "" }
+            .map { it.toUpperCase() }
+            .distinct()
+
+    println(distinctLetters)
+}
+```
+
+
+
+# 5.6 Maps
 
 Maps are analagous to Dicts in Python, and they are a powerful tool to quickly look up items based on a "Key" object.
