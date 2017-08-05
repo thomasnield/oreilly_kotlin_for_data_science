@@ -37,7 +37,9 @@ data class Vehicle(val make: String,
 
 Because arrays are of fixed length, and this length must be inferred in advance, they are not used often as the amount of data expected is not always known in advance. You are more likely to use Lists, which we will learn about shortly.
 
-Arrays are needed if you need to do numerical vector or matrix work, but more likely you will use libraries like Apache Commons Math, ND4J, Koma, and Kotlin-Statistics to maximize matrix work. When you are using numeric types in arrays, use the array builder that is optimized for that numeric type. Below, we declare an array of Doubles and print them as a concatenated string using `joinToString()`.
+Arrays are needed if you need to do numerical vector or matrix work, but more likely you will use libraries like Apache Commons Math, ND4J, Koma, and Kotlin-Statistics to maximize matrix work.
+
+When you are using numeric types in arrays, use the array builder that is optimized for that numeric type. Below, we declare an array of Doubles and print them as a concatenated string using `joinToString()`.
 
 ```kotlin
 fun main(args: Array<String>) {

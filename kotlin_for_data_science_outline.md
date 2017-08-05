@@ -59,7 +59,7 @@ PART 2: Practical Data Modeling for Production, with Kotlin
 * Ranking mutual friends in a social network
 * Getting a distribution of word occurrences in an article
 * Using Kotlin with Apache Spark
-* Studying white blood cell counts with Kotlin-Statistics
+* Studying white blood cell counts with Kotlin-Statisticsx`
 * Doing matrix math with Koma
 * Making models interactive with TornadoFX
 * Deploying your Kotlin project
