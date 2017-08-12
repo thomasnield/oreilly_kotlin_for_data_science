@@ -45,6 +45,21 @@ fun main(args: Array<String>) {
 }
 ```
 
+If each branch is one line, you don't need curly brackets.
+
+```kotlin
+fun main(args: Array<String>) {
+
+    val speedLimit = 65
+    val currentSpeed = 40
+
+    if (currentSpeed > speedLimit)
+        println("Exceeding speed limit!")
+    else
+        println("Speed is okay!")
+}
+```
+
 ## 4-1C: `if-else` that returns a value
 
 The `if` expression can actually return a value (in our earlier examples, it returned a `Unit`). This means you can save the result of an `if` expression and assign it to a variable.

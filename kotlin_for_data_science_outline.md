@@ -35,8 +35,8 @@ PART 1: From Data Science to Production, with Kotlin: The Basics
 * Lists
 * Sets
 * Maps
-* Mutable versus immutable collections
-* Factory patterns and Collection operators
+* Collection Operators
+* Factory patterns
 
 -------------------------------------------------
 
@@ -58,11 +58,10 @@ PART 2: Practical Data Modeling for Production, with Kotlin
 
 3) Practical applications of Kotlin for data science
 * Ranking mutual friends in a social network
-* Getting a distribution of word occurrences in an article
 * Using Kotlin with Apache Spark
-* Studying white blood cell counts with Kotlin-Statisticsx`
+* Using Kotlin-Statistics
 * Doing matrix math with Koma
-* Making models interactive with TornadoFX
+* Making interactive visuals with TornadoFX
 * Deploying your Kotlin project
 
 4) Going Forward
