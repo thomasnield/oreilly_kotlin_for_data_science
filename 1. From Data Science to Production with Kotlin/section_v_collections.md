@@ -339,4 +339,160 @@ fun main(args: Array<String>) {
 
 # 5.6 Maps
 
-Maps are analagous to Dicts in Python, and they are a powerful tool to quickly look up items based on a "Key" object.
+Maps are analagous to Dicts in Python, and they are a useful tool to quickly look up items based on a "Key" object.
+
+Data classes (as well as Strings, Ints, Longs, Dates, and other "value" types) make good key objects because they already implement `hashcode()/equals()`.
+
+## 5.6A
+
+To quickly declare a map on-the-spot, you can use the `mapOf()` function.
+
+```kotlin
+fun main(args: Array<String>) {
+
+    val map = mapOf(
+            5 to "Alpha",
+            6 to "Beta",
+            3 to "Gamma",
+            7 to "Delta",
+            11 to "Epsilon"
+    )
+
+    println(map[6])
+    println(map[8])
+}
+```
+
+
+## 5.6B
+
+If you want to load data into a map later, you can use `mutableMapOf()` to create a `Map` that can be modified. Note that if multiple values are assigned to the same key, only the last assigned value will persist.
+
+
+```kotlin
+fun main(args: Array<String>) {
+
+    val strings = listOf("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot")
+
+    val stringsByLengths = mutableMapOf<Int,String>()
+
+    for (s in strings) {
+        stringsByLengths[s.length] = s
+    }
+
+    println(stringsByLengths)
+}
+```
+
+We will learn about more robust ways to load maps (including multimaps) in the next video.
+
+## 5.6C
+
+You can also leverage data classes as keys. Below, we retrieve "John Simone" from the `Map` by using a `NameKey`.
+
+```kotlin
+import java.time.LocalDate
+
+fun main(args: Array<String>) {
+
+    data class Patient(val firstName: String,
+                       val lastName: String,
+                       val birthday: LocalDate,
+                       val whiteBloodCellCount: Int)
+
+    data class NameKey(val firstName: String, val lastName: String)
+
+    val patients = listOf(
+            Patient("John", "Simone", LocalDate.of(1989, 1, 7), 4500),
+            Patient("Sarah", "Marley", LocalDate.of(1970, 2, 5), 6700),
+            Patient("Jessica", "Arnold", LocalDate.of(1980, 3, 9), 3400),
+            Patient("Sam", "Beasley", LocalDate.of(1981, 4, 17), 8800),
+            Patient("Dan", "Forney", LocalDate.of(1985, 9, 13), 5400),
+            Patient("Lauren", "Michaels", LocalDate.of(1975, 8, 21), 5000),
+            Patient("Michael", "Erlich", LocalDate.of(1985, 12, 17), 4100),
+            Patient("Jason", "Miles", LocalDate.of(1991, 11, 1), 3900),
+            Patient("Rebekah", "Earley", LocalDate.of(1985, 2, 18), 4600),
+            Patient("James", "Larson", LocalDate.of(1974, 4, 10), 5100),
+            Patient("Dan", "Ulrech",  LocalDate.of(1991, 7, 11), 6000),
+            Patient("Heather", "Eisner", LocalDate.of(1994, 3, 6), 6000),
+            Patient("Jasper", "Martin", LocalDate.of(1971, 7, 1), 6000)
+    )
+
+    val mappedByName = mutableMapOf<NameKey, Patient>()
+
+    for (patient in patients) {
+        val key = NameKey(patient.firstName, patient.lastName)
+        mappedByName[key] = patient
+    }
+
+    val retrievedPatient = mappedByName[NameKey("John", "Simone")]
+    println(retrievedPatient)
+}
+```
+
+# 5.7: Factory Patterns with Companion Objects
+
+One thing that can be helpful is to save properties and functions at the "class" level, not the instance of each object. This can be achieved using objects and companion objects.
+
+For instance, we can have a `PatientDirectory` object embedded right inside the `Patient` class that could hold or access the entire database of patients. It can also have a helper function to retrieve a `Patient` for a given ID.
+
+
+```kotlin
+
+
+fun main(args: Array<String>) {
+
+    val retreivedPatient = Patient.PatientDirectory.forId(3)
+
+    print(retreivedPatient)
+}
+
+data class Patient(val id: Int,
+                   val firstName: String,
+                   val lastName: String) {
+
+    object PatientDirectory {
+
+        val allPatients = listOf(
+                Patient(1, "John", "Mooney"),
+                Patient(2, "Sam", "Bella"),
+                Patient(3, "Jake", "Blaine"),
+                Patient(4, "Hannah", "Smith"),
+                Patient(5, "John", "Mooney")
+        )
+
+        fun forId(id: Int) = allPatients.find { it.id == id }
+    }
+}
+```
+
+You can also eliminate having to explicitly call the embedded object by using a `companion object` instead. This is helpful if you don't intend on having different objects in a class.
+
+```kotlin
+
+
+fun main(args: Array<String>) {
+
+    val retreivedPatient = Patient.forId(3)
+
+    print(retreivedPatient)
+}
+
+data class Patient(val id: Int,
+                   val firstName: String,
+                   val lastName: String) {
+
+    companion object {
+
+        val allPatients = listOf(
+                Patient(1, "John", "Mooney"),
+                Patient(2, "Sam", "Bella"),
+                Patient(3, "Jake", "Blaine"),
+                Patient(4, "Hannah", "Smith"),
+                Patient(5, "John", "Mooney")
+        )
+
+        fun forId(id: Int) = allPatients.find { it.id == id }
+    }
+}
+```

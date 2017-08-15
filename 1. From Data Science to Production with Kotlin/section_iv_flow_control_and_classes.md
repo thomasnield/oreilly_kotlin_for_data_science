@@ -430,3 +430,49 @@ object ModelArguments {
     fun meetsMinimum(accuracy: Double) = accuracy >= minimumAccuracy
 }
 ```
+
+# 4-7 Enums
+
+
+Enums are kind of like Singletons, but are restricted to a few specified instances rather than just one. They can be useful to define a type that only has a strict set of values. For example, instead of using a "MALE" and "FEMALE" as strings, you can make this an enum type instead that allows no other values (whereas Strings can allow any value).
+
+```kotlin
+fun main(args: Array<String>) {
+
+    val patient = Patient(firstName = "John", lastName = "Mooney", gender = Gender.MALE)
+
+    println(patient.gender)
+
+}
+
+data class Patient(val firstName: String,
+                   val lastName: String,
+                   val gender: Gender)
+
+
+enum class Gender {
+    MALE,
+    FEMALE
+}
+```
+
+Enums can be much more complex and have abstract functions with different implementations, but we will keep enums simple for our purposes. Since enums are classes, we can specify properties for each instance. Below, we supply a "chromosomes" property which holds a `String` of "XX" or "XY" for `FEMALE` and `MALE` respectively.
+
+```kotlin
+fun main(args: Array<String>) {
+
+    val patient = Patient(firstName = "John", lastName = "Mooney", gender = Gender.MALE)
+
+    println(patient.gender.chromosomes)
+}
+
+data class Patient(val firstName: String,
+                   val lastName: String,
+                   val gender: Gender)
+
+
+enum class Gender(val chromosomes: String) {
+    MALE("XY"),
+    FEMALE("XX")
+}
+```

@@ -28,6 +28,7 @@ PART 1: From Data Science to Production, with Kotlin: The Basics
 * Classes
 * Data classes
 * Singletons
+* Enums
 
 5) Collections
 * Ranges and loops
@@ -48,7 +49,7 @@ PART 2: Practical Data Modeling for Production, with Kotlin
 * SQL queries
 * Lazy Properties
 
-2) Functional Programming and Sequences
+2) Functional Programming with Kotlin
 * Higher Order Functions and lambdas
 * Sequences
 * let() and apply()
@@ -61,7 +62,7 @@ PART 2: Practical Data Modeling for Production, with Kotlin
 * Using Kotlin with Apache Spark
 * Using Kotlin-Statistics
 * Doing matrix math with Koma
-* Making interactive visuals with TornadoFX
+* Interactive visuals with TornadoFX
 * Deploying your Kotlin project
 
 4) Going Forward
