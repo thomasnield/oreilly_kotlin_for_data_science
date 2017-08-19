@@ -22,6 +22,8 @@ fun main(args: Array<String>) {
 
 
 ## 1-1B: Reading a File
+
+
 Of course, you can also use a `forEach()` with a lambda:
 
 ```kotlin
@@ -60,7 +62,7 @@ fun main(args: Array<String>) {
 
 ## 1-1D: Turning Each Record into a Data Class Instance
 
-We can also turn each line of the file into an instance of a `CustomerOrder` data class.
+We can turn each line of the file into an instance of a `CustomerOrder` data class.
 
 ```kotlin
 import java.io.File
@@ -71,7 +73,8 @@ fun main(args: Array<String>) {
 
     val reader = File("/home/thomas/Desktop/customer_orders.csv").bufferedReader()
 
-    val orders = reader.readLines().drop(1)
+    val orders = reader.readLines()
+            .drop(1)  //skip header line
             .map { it.split(",") }
             .map {
                 CustomerOrder(
@@ -97,11 +100,11 @@ data class CustomerOrder(
 )
 ```
 
-It would be more efficient if we used Sequences rather than creating all these intermediary collections with collection operators, which we will learn about in the next section.
+This would be more efficient if we used Sequences (which effectively work like assembly lines) rather than creating all these intermediary collections with collection operators, which we will learn about in the next section.
 
 ## 1-2: Writing to a File
 
-You can also write to files. There are functional, advanced ways to express this in fewer lines, but we will need to touch on those patterns in the next section. 
+You can also write to files. There are functional, advanced ways to express this in fewer lines, but here is the most basic way:
 
 ```Kotlin
 import java.io.File
@@ -191,6 +194,10 @@ data class CustomerOrder(
 ```
 
 ## 1-3B: Passing Parameters to a query
+
+
+To pass parameters to a query, use a `PreparedStatement` to safely inject them. This will avoid inadvertent or malicious SQL injection.
+
 
 ```kotlin
 import java.sql.DriverManager
