@@ -46,8 +46,7 @@ PART 2: Practical Data Modeling for Production, with Kotlin
 1) Working with Data Sources
 * Reading text Files
 * SQL queries
-* Web requests
-* Lazy Properties
+* Web requests and Lazy Properties
 
 2) Functional Programming with Kotlin
 * Higher Order Functions and lambdas

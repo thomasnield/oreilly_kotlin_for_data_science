@@ -13,10 +13,10 @@ fun main(args: Array<String>) {
         }
 
         prices {
-            range(daysBeforeStayRange = 0..4, priceRange = 170.01..200.00)
-            range(daysBeforeStayRange = 5..10, priceRange = 150.01..170.00)
-            range(daysBeforeStayRange = 11..20, priceRange = 110.01..150.00)
-            range(daysBeforeStayRange = 21..60, priceRange = 75.00..110.00)
+            price(daysBeforeStay = 0..4, priceRange = 170.01..200.00)
+            price(daysBeforeStay = 5..10, priceRange = 150.01..170.00)
+            price(daysBeforeStay = 11..20, priceRange = 110.01..150.00)
+            price(daysBeforeStay = 21..60, priceRange = 75.00..110.00)
         }
     }
 }
@@ -80,9 +80,9 @@ class RoomBuilder {
 class PriceBuilder {
     val prices = mutableListOf<Price>()
 
-    fun range(daysBeforeStayRange: IntRange, priceRange: ClosedRange<Double>) {
+    fun price(daysBeforeStay: IntRange, priceRange: ClosedRange<Double>) {
         prices += Price(
-                daysBeforeStayRange,
+                daysBeforeStay,
                 BigDecimal.valueOf(priceRange.start)..BigDecimal.valueOf(priceRange.endInclusive)
         )
     }

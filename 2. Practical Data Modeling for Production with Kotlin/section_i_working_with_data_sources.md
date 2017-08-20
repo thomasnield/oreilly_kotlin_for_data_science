@@ -243,3 +243,42 @@ data class CustomerOrder(
         val quantity: Int
 )
 ```
+
+## 1-4A: Working with web requests
+
+Kotlin should be able to retrieve any remote resources using standard protocols.
+
+For instance, you can process an HTTP request fairly easily. Below, we read a Gist on GitHub containing a text file of the 50 U.S. states.
+
+```kotlin
+import java.net.URL
+
+fun main(args: Array<String>) {
+
+    val usStates = URL("https://goo.gl/S0xuOi").readText().split(Regex("\\r?\\n"))
+
+    println(usStates)
+}
+```
+
+## 1-4B: Lazy Properties
+
+Sometimes it can be helpful to lazily initialize a property, especially for large expensive data sets. The benefit of lazy properties is they will not eagerly initialize when the containing Kotlin file is used. Rather, they will construct the moment that property is called. 
+
+Lazy properties are enabled by Kotlin's property delegation, which we will not dive into in depth but you can read about in the [Kotlin Reference](https://kotlinlang.org/docs/reference/delegated-properties.html). For our purposes, all you need to do is call `by lazy { }` next to your property declaration and the data set will go into that lambda argument.
+
+
+```kotlin
+import java.net.URL
+
+fun main(args: Array<String>) {
+
+    println("Application started without loading U.S. states")
+    println(usStates) //usStates will load now that its called
+}
+
+val usStates by lazy {
+    println("usStates called, loading and caching!")
+    URL("https://goo.gl/S0xuOi").readText().split(Regex("\\r?\\n"))
+}
+```
