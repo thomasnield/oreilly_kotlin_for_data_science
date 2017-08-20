@@ -263,7 +263,7 @@ fun main(args: Array<String>) {
 
 ## 1-4B: Lazy Properties
 
-Sometimes it can be helpful to lazily initialize a property, especially for large expensive data sets. The benefit of lazy properties is they will not eagerly initialize when the containing Kotlin file is used. Rather, they will construct the moment that property is called. 
+Sometimes it can be helpful to lazily initialize a property, especially for large expensive data sets. The benefit of lazy properties is they will not eagerly initialize when the containing Kotlin file is used. Rather, they will construct the moment that property is called.
 
 Lazy properties are enabled by Kotlin's property delegation, which we will not dive into in depth but you can read about in the [Kotlin Reference](https://kotlinlang.org/docs/reference/delegated-properties.html). For our purposes, all you need to do is call `by lazy { }` next to your property declaration and the data set will go into that lambda argument.
 
@@ -278,7 +278,7 @@ fun main(args: Array<String>) {
 }
 
 val usStates by lazy {
-    println("usStates called, loading and caching!")
+    println("property called, loading and caching!")
     URL("https://goo.gl/S0xuOi").readText().split(Regex("\\r?\\n"))
 }
 ```

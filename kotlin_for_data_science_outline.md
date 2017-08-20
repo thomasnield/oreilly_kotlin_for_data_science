@@ -50,13 +50,17 @@ PART 2: Practical Data Modeling for Production, with Kotlin
 
 2) Functional Programming with Kotlin
 * Higher Order Functions and lambdas
+* Lambda Syntax
+* Generics
 * Sequences
 * let() and apply()
+
+3) Adapting Kotlin to Your Domain
 * Extension Functions and Properties
 * Extension Operator Functions
 * Leveraging DSL’s
 
-3) Practical applications of Kotlin for data science
+4) Practical applications of Kotlin for data science
 * Ranking mutual friends in a social network
 * Using Kotlin with Apache Spark
 * Using Kotlin-Statistics
@@ -64,7 +68,7 @@ PART 2: Practical Data Modeling for Production, with Kotlin
 * Interactive visuals with TornadoFX
 * Deploying your Kotlin project
 
-4) Going Forward
+5) Going Forward
 * Furthering your knowledge of Kotlin and the JVM
 * Notable Kotlin/Java data science libraries
 * Getting connected with the Kotlin community
