@@ -446,7 +446,7 @@ fun main(args: Array<String>) {
 }
 ```
 
-## 3.6C - Nullable Exceptions and the "Bang! Bang!" Operator
+## 3.5C - Nullable Exceptions and the "Bang! Bang!" Operator
 
 The "Bang! Bang!" operator, unofficially known as the "hold my beer" operator, is a brute force way to treat a nullable type as no longer nullable. The problem is it will throw a null pointer exception if the value is indeed null.
 
@@ -488,7 +488,7 @@ fun main(args: Array<String>) {
 }
 ```
 
-# 3.7 Project Organization
+# 3.6 Project Navigation and Organization
 
 Cover the following:
 
