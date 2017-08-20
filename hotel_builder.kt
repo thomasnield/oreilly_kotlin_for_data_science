@@ -2,7 +2,7 @@ import java.math.BigDecimal
 
 fun main(args: Array<String>) {
 
-    hotelmodel {
+    hotel {
 
         rooms {
             queen(quantity = 60)
@@ -18,21 +18,20 @@ fun main(args: Array<String>) {
             range(daysBeforeStayRange = 11..20, priceRange = 110.01..150.00)
             range(daysBeforeStayRange = 21..60, priceRange = 75.00..110.00)
         }
-
-        executeOptimization()
     }
 }
 
 
-fun hotelmodel(op: HotelModel.() -> Unit): HotelModel {
-    val newHotelModel = HotelModel()
+fun hotel(op: HotelBuilder.() -> Unit): HotelBuilder {
+    val newHotelModel = HotelBuilder()
 
     newHotelModel.op()
 
     return newHotelModel
 }
 
-class HotelModel {
+
+class HotelBuilder {
 
     private val availableRooms = mutableListOf<Room>()
     private val availablePrices = mutableListOf<Price>()
