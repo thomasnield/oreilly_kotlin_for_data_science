@@ -1,1 +1,107 @@
 # Section III: Adapting Kotlin to your Domain
+
+One of the more modern, useful features of Kotlin is it's ability to quickly adapt libraries and even the language itself so it streamlines towards your business domain. These ideas are not new as C# and Groovy pioneered a couple of these features, but Kotlin streamlines them into a single, seamless platform.
+
+## 3.1 - Extension Functions
+
+Have you ever wanted to "add" functions or properties to an object, even if it's in a library you don't own? You may have done this in Python before, but it can quickly become messy because you are mutating the behaviors and attributes of an object. Kotlin can achieve this for the most part, without actually modifying the object itself.
+
+## 3.1A - Extension Functions
+
+Sometimes it can be helpful to add functions to types we do not own, or we do own but don't want to clutter by actually adding them. Kotlin extension functions allow us to "add" a function to class but it will actually compile it as a helper function, not physically add it to the class.
+
+For instance, say when we are working with dates we are frequently calculating the start date of the week containing that date. This could be helpful for reporting or grouping up items by week.
+
+Rather than creating a helper function, we can use an extension function that will attach itself directly to the `LocalDate` type.
+
+```Kotlin
+import java.time.DayOfWeek
+import java.time.LocalDate
+
+fun main(args: Array<String>) {
+
+    val myDate = LocalDate.of(2017,8,31)
+
+    val weekStartDate = myDate.startOfWeek()
+
+    println(weekStartDate)
+}
+
+fun LocalDate.startOfWeek() = (0..6).asSequence()
+            .map { this.minusDays(it.toLong()) }
+            .first { it.dayOfWeek == DayOfWeek.MONDAY }
+
+```
+
+The body of the function will refer to the object it has been applied on as `this`, acting as if its scope is inside the class. However, extension functions only have access to code of that type that has been made public and can't access anything that is private.
+
+
+## 3.1B - Extension Function with Parameters
+
+Extension functions behave just like functions otherwise, other than they are targeting that type they are being applied to. We can therefore use parameters and default parameters.
+
+```Kotlin
+import java.time.DayOfWeek
+import java.time.LocalDate
+
+fun main(args: Array<String>) {
+
+    val myDate = LocalDate.of(2017,8,31)
+
+    val weekStartDate = myDate.startOfWeek(DayOfWeek.SUNDAY)
+
+    println(weekStartDate)
+}
+
+fun LocalDate.startOfWeek(startDayOfWeek: DayOfWeek = DayOfWeek.MONDAY) = (0..6).asSequence()
+            .map { this.minusDays(it.toLong()) }
+            .first { it.dayOfWeek == startDayOfWeek }
+```
+
+## 3.1C - Extension Properties
+
+If your extension function takes arguments or could take arguments, you should keep it a function. But if you never foresee needing any arguments, you can use an extension property instead. Below, we make `startOfWeek` an extension property that will always be starting on Monday.
+
+```kotlin
+import java.time.DayOfWeek
+import java.time.LocalDate
+
+fun main(args: Array<String>) {
+
+    val myDate = LocalDate.of(2017,8,31)
+
+    val weekStartDate = myDate.startOfWeek
+
+    println(weekStartDate)
+}
+
+val LocalDate.startOfWeek get() = (0..6).asSequence()
+            .map { this.minusDays(it.toLong()) }
+            .first { it.dayOfWeek == DayOfWeek.MONDAY }
+```
+
+## 3.2 - Operator and Infix Functions
+
+You can leverage operator symbols and to some degree custom symbols to create more intuitive operator syntaxes for a type.
+
+
+## 3.2A - Operator Function Example 1
+
+For instance, you cannot add an Integer to a `LocalDate` object to add that many days to it. But if you use the operator `plus()` function, you can achieve this.
+
+```kotlin
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit
+
+fun main(args: Array<String>) {
+
+    val myDate = LocalDate.of(2017,8,31)
+
+    val tomorrow = myDate + 1
+
+    println(tomorrow)
+}
+
+operator fun LocalDate.plus(days: Int) = plusDays(days.toLong())
+operator fun LocalDate.minus(days: Int) = minusDays(days.toLong())
+```
