@@ -16,8 +16,7 @@ PART 1: From Data Science to Production, with Kotlin: The Basics
 3) Kotlin Basics
 * Your first Kotlin application
 * Variables
-* Types
-* Basic Operators (+ - * / == !=)
+* Types and Operators (+ - * / == !=)
 * Functions
 * Nullable Types
 * Project organization, navigation, and refactoring

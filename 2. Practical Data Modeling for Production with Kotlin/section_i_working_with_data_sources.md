@@ -102,7 +102,7 @@ data class CustomerOrder(
 
 This would be more efficient if we used Sequences (which effectively work like assembly lines) rather than creating all these intermediary collections with collection operators, which we will learn about in the next section.
 
-## 1-2: Writing to a File
+## 1-1E: Writing to a File
 
 You can also write to files. There are functional, advanced ways to express this in fewer lines, but here is the most basic way:
 
