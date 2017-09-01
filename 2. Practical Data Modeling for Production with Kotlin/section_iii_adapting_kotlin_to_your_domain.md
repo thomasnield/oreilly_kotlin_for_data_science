@@ -85,7 +85,7 @@ val LocalDate.startOfWeek get() = (0..6).asSequence()
 You can leverage operator symbols and to some degree custom symbols to create more intuitive operator syntaxes for a type.
 
 
-## 3.2A - Operator Function Example 1
+## 3.2 - Operator Functions
 
 For instance, you cannot add an Integer to a `LocalDate` object to add that many days to it. But if you use the operator `plus()` function, you can achieve this.
 
@@ -105,3 +105,132 @@ fun main(args: Array<String>) {
 operator fun LocalDate.plus(days: Int) = plusDays(days.toLong())
 operator fun LocalDate.minus(days: Int) = minusDays(days.toLong())
 ```
+
+Here are the operator functions you can leverage:
+
+|Symbol Signature|Operator Function|
+|---|---|
+|a + b|a.plus(b)|
+|a - b|a.minus(b)|
+|a / b|a.div(b)|
+|a * b|a.times(b)|
+|a % b|a.rem(b)|
+|a..b|a.rangeTo(b)|
+|a -= b|	a.minusAssign(b)
+|a *= b|	a.timesAssign(b)
+|a /= b|	a.divAssign(b)
+|a %= b|	a.remAssign(b), a.modAssign(b) (deprecated)
+|a in b|b.contains(a)|
+|a !in b|!b.contains(a)|
+|a[i]|	a.get(i)
+|a[i, j]|	a.get(i, j)
+|a[i_1, ..., i_n]|	a.get(i_1, ..., i_n)
+|a[i] = b|	a.set(i, b)
+|a[i, j] = b|	a.set(i, j, b)
+|a[i_1, ..., i_n] = b|	a.set(i_1, ..., i_n, b)
+
+
+
+## 3.3 - DSL's and Builders
+
+A cool feature that you can leverage with Kotlin are DSL's (domain specific languages). This essentially allows you to cleverly use Kotlin to create a programming language specific to your business. This can be a helpful way to parameterize models and inputs, even accessible to nontechnical users.
+
+Below is a DSL to build the inputs for a hotel pricing model.
+
+```kotlin
+import java.math.BigDecimal
+
+fun main(args: Array<String>) {
+
+    hotel {
+
+        rooms {
+            queen(quantity = 60)
+            doublequeen(quantity = 60)
+
+            king(quantity = 20)
+            doubleking(quantity = 20)
+        }
+
+        prices {
+            price(daysBeforeStay = 0..4, priceRange = 170.01..200.00)
+            price(daysBeforeStay = 5..10, priceRange = 150.01..170.00)
+            price(daysBeforeStay = 11..20, priceRange = 110.01..150.00)
+            price(daysBeforeStay = 21..60, priceRange = 75.00..110.00)
+        }
+    }
+}
+```
+
+And here is the backing implementation. We are using a special lambda type called a receiver function, which is a lambda that targets a "receiving object". For instance `PriceBuilder.() -> Unit` is a parameterless function that targets actions against a `PriceBuilder`. The function will have a `this` scope against the `PriceBuilder`.
+
+```kotlin
+
+fun hotel(op: HotelBuilder.() -> Unit): HotelBuilder {
+    val newHotelModel = HotelBuilder()
+
+    newHotelModel.op()
+
+    return newHotelModel
+}
+
+
+class HotelBuilder {
+
+    private val availableRooms = mutableListOf<Room>()
+    private val availablePrices = mutableListOf<Price>()
+
+    fun rooms(op: RoomBuilder.() -> Unit) {
+        val builder = RoomBuilder()
+        builder.op()
+        availableRooms += builder.roomQueue
+    }
+
+    fun prices(op: PriceBuilder.() -> Unit) {
+        val builder = PriceBuilder()
+        builder.op()
+        availablePrices += builder.prices
+    }
+
+    fun executeOptimization() {
+        println("Input contains ${availableRooms.size} rooms and ${availablePrices.size} price ranges.")
+        println("Executing optimization operations...")
+    }
+}
+
+class Room(val bedType: BedType, val isDouble: Boolean = false)
+
+class Price(val daysBeforeStayRange: IntRange, val priceRange: ClosedRange<BigDecimal>)
+
+enum class BedType {
+    KING,
+    QUEEN
+}
+
+class RoomBuilder {
+    val roomQueue = mutableListOf<Room>()
+
+    fun queen(quantity: Int) = add(BedType.QUEEN, quantity, false)
+    fun king(quantity: Int) = add(BedType.KING, quantity, false)
+    fun doublequeen(quantity: Int) = add(BedType.QUEEN, quantity, true)
+    fun doubleking(quantity: Int) = add(BedType.KING, quantity, true)
+
+    fun add(bedType: BedType, quantity: Int, isDouble: Boolean)  =
+            (1..quantity).asSequence()
+                .map { Room(bedType, isDouble) }
+                .forEach { roomQueue += it }
+}
+
+class PriceBuilder {
+    val prices = mutableListOf<Price>()
+
+    fun price(daysBeforeStay: IntRange, priceRange: ClosedRange<Double>) {
+        prices += Price(
+                daysBeforeStay,
+                BigDecimal.valueOf(priceRange.start)..BigDecimal.valueOf(priceRange.endInclusive)
+        )
+    }
+}
+```
+
+It is easy to get carried away with DSL's, and they shouldn't be used for the sake of. Only use them if they significantly streamline the creation of complex structures that often serve as inputs. They can also be helpful to streamline certain API's and libraries that often have nested items, [like user interfaces with nested controls (see the TornadoFX library)](https://github.com/edvin/tornadofx) or [defining static data structures like HTML](https://github.com/Kotlin/kotlinx.html).

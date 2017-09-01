@@ -56,7 +56,7 @@ PART 2: Practical Data Modeling for Production, with Kotlin
 
 3) Adapting Kotlin to Your Domain
 * Extension Functions and Properties
-* Extension Operator and Infix Functions
+* Extension Operators
 * Leveraging DSL’s
 
 4) Practical applications of Kotlin for data science
