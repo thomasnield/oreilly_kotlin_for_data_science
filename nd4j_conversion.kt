@@ -18,10 +18,12 @@ fun main(args: Array<String>) {
 fun <T> Iterable<T>.toINDArray(vararg valueSelectors: (T) -> Double): INDArray {
     val list = toList()
 
+    val selectedValues = list.asSequence()
+            .flatMap { item -> valueSelectors.asSequence().map { it(item) } }
+            .toList().toDoubleArray()
+
     return Nd4j.create(
-            list.asSequence()
-                    .flatMap { item -> valueSelectors.asSequence().map { it(item) } }
-                    .toList().toDoubleArray(),
+            selectedValues,
             intArrayOf(list.size, valueSelectors.size)
     )
 }
