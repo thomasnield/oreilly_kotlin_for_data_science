@@ -63,7 +63,7 @@ PART 2: Practical Data Modeling for Production, with Kotlin
 * Ranking mutual friends in a social network
 * Using Kotlin with Apache Spark
 * Using Kotlin-Statistics
-* Doing matrix math with Koma
+* Doing matrix math with ND4J (Java's NumPy)
 * Interactive visuals with TornadoFX
 * Deploying your Kotlin project
 

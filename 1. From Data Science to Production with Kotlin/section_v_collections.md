@@ -11,6 +11,8 @@ In Kotlin, you can pair two values together to create a "range". Some types supp
 To create a range, put a `..` between the two values. Below, we create a range of 1 through 10, then print each value in that range with a `for` loop.
 
 ```kotlin
+package com.oreilly
+
 fun main(args: Array<String>) {
 
     val range = 1..10
@@ -26,6 +28,8 @@ fun main(args: Array<String>) {
 Below, we create a range with two dates, and use the `in` operator to see if it contains a certain date in that range.
 
 ```kotlin
+package com.oreilly
+
 import java.time.LocalDate
 
 fun main(args: Array<String>) {
@@ -43,6 +47,9 @@ fun main(args: Array<String>) {
 Note that you cannot loop through a range of `LocalDate`, because it is a `Comparable` and therefore only works with `ClosedRange` rather than `IntRange` or other numeric ranges. We will learn how to iterate a series of dates in a range later.
 
 ```kotlin
+package com.oreilly
+
+
 import java.time.LocalDate
 
 fun main(args: Array<String>) {
@@ -64,6 +71,9 @@ An `Array` is a fixed-length collection of items that maintains their order.
 Below, we create an array of vehicles and print the second item in the array.
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val samples = arrayOf(
@@ -89,6 +99,9 @@ data class Vehicle(val make: String,
 We can also loop through the items:
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val samples = arrayOf(
@@ -118,6 +131,9 @@ data class Vehicle(val make: String,
 We can also loop through with indices:
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val samples = arrayOf(
@@ -151,6 +167,9 @@ Arrays are needed if you need to do numerical vector or matrix work, but more li
 When you are using numeric types in arrays, use the array builder that is optimized for that numeric type. Below, we declare an array of Doubles and print them as a concatenated string using `joinToString()`.
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val vector = doubleArrayOf(1.0, 5.0, 6.0, 11.0)
@@ -163,6 +182,9 @@ fun main(args: Array<String>) {
 Note also that arrays are mutable, and any element can be modified at any given time.
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val vector = doubleArrayOf(1.0, 5.0, 6.0, 11.0)
@@ -178,6 +200,9 @@ fun main(args: Array<String>) {
 To leverage multidimensional arrays, nest `arrayOf()` calls to create as many dimensions as you need. Again, you should try to leverage libraries like Apache Commons Math, ND4J, Koma, or Kotlin-Statistics instead.
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val matrix = arrayOf(
@@ -197,6 +222,9 @@ Lists are an ordered collection of elements that, depending on whether it is mut
 You declare an immutable List using the `listOf()` function.
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val strings = listOf("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot")
@@ -211,6 +239,9 @@ Lists are immutable, meaning that factories that "modify" the List will actually
 
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val strings = listOf("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot")
@@ -228,6 +259,9 @@ fun main(args: Array<String>) {
 To make a mutable List, use the `mutableListOf()` function instead. This list can have items modified, removed, and appended at any time. Try to stick with immutable lists so you don't create opportunities for mistakes.
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val strings = mutableListOf("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot")
@@ -249,6 +283,9 @@ Below, we try to add an item to a `MutableSet` but since it already contains tha
 
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val strings = mutableSetOf("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot")
@@ -272,6 +309,9 @@ For instance, rather than using a loop to print each item in a `List`, `Array`, 
 
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val strings = listOf("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot")
@@ -288,6 +328,9 @@ As you start using these kinds of functions, you will find loops become a rarity
 Below, we quickly turn a `List<String>` into a `List<Int>` by calling the `map()` function and pass a lambda argument mapping each String to its length.
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val strings = listOf("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot")
@@ -306,6 +349,9 @@ We can also filter items that meet a condition into a new `List`. For instance, 
 
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val strings = listOf("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot")
@@ -322,6 +368,9 @@ In the below example, we derive all the distinct letters from our six Strings. W
 
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val strings = listOf("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot")
@@ -348,6 +397,9 @@ Data classes (as well as Strings, Ints, Longs, Dates, and other "value" types) m
 To quickly declare a map on-the-spot, you can use the `mapOf()` function.
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val map = mapOf(
@@ -370,6 +422,9 @@ If you want to load data into a map later, you can use `mutableMapOf()` to creat
 
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val strings = listOf("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot")
@@ -391,6 +446,9 @@ We will learn about more robust ways to load maps (including multimaps) in the n
 You can also leverage data classes as keys. Below, we retrieve "John Simone" from the `Map` by using a `NameKey`.
 
 ```kotlin
+package com.oreilly
+
+
 import java.time.LocalDate
 
 fun main(args: Array<String>) {
@@ -438,6 +496,9 @@ For instance, we can have a `PatientDirectory` object embedded right inside the 
 
 
 ```kotlin
+package com.oreilly
+
+
 
 
 fun main(args: Array<String>) {
@@ -469,6 +530,9 @@ data class Patient(val id: Int,
 You can also eliminate having to explicitly call the embedded object by using a `companion object` instead. This is helpful if you don't intend on having different objects in a class.
 
 ```kotlin
+package com.oreilly
+
+
 
 
 fun main(args: Array<String>) {

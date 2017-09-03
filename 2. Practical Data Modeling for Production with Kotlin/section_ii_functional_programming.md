@@ -11,6 +11,10 @@ We actually have used higher order functions already when using lambda arguments
 We can use higher-order functions to turn a `String` somehow into a `Int`, but allow the user to define a lambda on how to do that. For instance, we can pass a lambda that maps a `String` to its length.
 
 ```kotlin
+package com.oreilly
+\npackage com.oreilly
+\r\npackage com.oreilly
+
 fun main(args: Array<String>) {
 
     val myString = "Foxtrot"
@@ -27,6 +31,10 @@ fun mapStringToInt(input: String, mapper: (String) -> Int) = mapper(input)ut)
 If a lambda is the last argument, you can put it outside the rounded paranthesis like so:
 
 ```kotlin
+package com.oreilly
+\npackage com.oreilly
+\r\npackage com.oreilly
+
 fun main(args: Array<String>) {
 
     val myString = "Foxtrot"
@@ -44,6 +52,10 @@ fun mapStringToInt(input: String, mapper: (String) -> Int) = mapper(input)
 When passing lambda arguments, you can sometimes get greater efficiency by inlining functions. This basically means injecting the resulting bytecode of the lambda into its target, and therefore eliminating the lambda object upon compilation.
 
 ```kotlin
+package com.oreilly
+\npackage com.oreilly
+\r\npackage com.oreilly
+
 fun main(args: Array<String>)
     val myString = "Foxtrot"
 
@@ -65,6 +77,10 @@ https://kotlinlang.org/docs/reference/inline-functions.html
 There are other syntaxes you can use to define lambdas. The simplest one is the `it` keyword referring to the single paramter input, but there are times you need to be more explicit.
 
 ```kotlin
+package com.oreilly
+\npackage com.oreilly
+\r\npackage com.oreilly
+
 val length = mapStringToInt(myString) { it.length }
 val length = mapStringToInt(myString) { s -> s.length }
 val length = mapStringToInt(myString) { s: String -> s.length }
@@ -76,6 +92,10 @@ val length = mapStringToInt(myString, String::length))
 If you have multiple parameters in your lambda, separate them by commas and use the arrow syntax.
 
 ```kotlin
+package com.oreilly
+\npackage com.oreilly
+\r\npackage com.oreilly
+
 fun main(args: Array<String>) {
 
     val str1 = "Alpha"
@@ -106,6 +126,10 @@ For instance, we can take a `String` input and map it to any given type `R`. Gen
 Below, we take a `dateString` of `2017-01-01` and use a `mapString()` function to convert it a `LocalDate` as well as an `Int` (it's length).
 
 ```kotlin
+package com.oreilly
+\npackage com.oreilly
+\r\npackage com.oreilly
+
 import java.time.LocalDate
 
 fun main(args: Array<String>) {
@@ -129,6 +153,10 @@ This is not dynamically typed. The compiler was smart enough to see `R` was a `L
 You can have multiple generic types for a given function as well. For instance, we can accept a parameter of any given type `T` and return any type `R`. Below, we use a `map()` function that maps any arbitrary type `T` to an arbitrary type `R`. It can be used to turn a `String` into a `LocalDate` as well as an `Int` into a `String`.
 
 ```kotlin
+package com.oreilly
+\npackage com.oreilly
+\r\npackage com.oreilly
+
 import java.time.LocalDate
 
 fun main(args: Array<String>) {
@@ -180,6 +208,10 @@ If you really enjoy this style of programming where items are fluently processed
 A `Sequence` is lazy and does not execute until certain terminator operators are called (like `toList()`, `average()`, `count()`, etc).
 
 ```kotlin
+package com.oreilly
+\npackage com.oreilly
+\r\npackage com.oreilly
+
 fun main(args: Array<String>) {
 
     val codeWords = sequenceOf("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot")
@@ -199,6 +231,10 @@ Pretty much any collection or Iterable type will have an `asSequence()` function
 Below, we take a `List<String>` and turn it into a `Sequence` that is turned into a `Sequence` of its letters, then we `distinct` them and collect them into another `List`.
 
 ```kotlin
+package com.oreilly
+\npackage com.oreilly
+\r\npackage com.oreilly
+
 fun main(args: Array<String>) {
 
     val codeWords = listOf("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot")
@@ -227,6 +263,10 @@ The `let()` operator will take any given type `T` and turn it into a type `R`. I
 For instance, let's say you want to uppercase a `String` and then concatenate it to its reversed counterpart (essentially mirroring it). You may have to save an `uppercased` variable to do this.
 
 ```kotlin
+package com.oreilly
+\npackage com.oreilly
+\r\npackage com.oreilly
+
 fun main(args: Array<String>) {
 
     val myString = "Bravo"
@@ -243,6 +283,10 @@ But if you use the `let()`, you can avoid that step of saving the `uppercased` v
 
 
 ```kotlin
+package com.oreilly
+\npackage com.oreilly
+\r\npackage com.oreilly
+
 fun main(args: Array<String>) {
 
     val myString = "Bravo"
@@ -258,6 +302,10 @@ fun main(args: Array<String>) {
 You can also use `let()` to quickly print the result of a long chain of operations rather than saving the result to a variable and printing it.
 
 ```kotlin
+package com.oreilly
+\npackage com.oreilly
+\r\npackage com.oreilly
+
 fun main(args: Array<String>) {
 
     val codeWords = sequenceOf("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot")
@@ -282,6 +330,10 @@ It can be helpful to declare an object but then immediately manipulate it, witho
 Below, we have two examples of `apply()`. The first `apply()` call will do further manipulations with the returned `LocalDate` before assigning it to the `todaysDate` variable. The second will construct a `MyProcess` instance but immediately call its `run()` function before assigning it to the `immediateProcess` variable.
 
 ```kotlin
+package com.oreilly
+\npackage com.oreilly
+\r\npackage com.oreilly
+
 import java.time.LocalDate
 import java.time.LocalTime
 

@@ -14,7 +14,9 @@ For instance, say when we are working with dates we are frequently calculating t
 
 Rather than creating a helper function, we can use an extension function that will attach itself directly to the `LocalDate` type.
 
-```Kotlin
+```kotlin
+package com.oreilly
+
 import java.time.DayOfWeek
 import java.time.LocalDate
 
@@ -40,7 +42,11 @@ The body of the function will refer to the object it has been applied on as `thi
 
 Extension functions behave just like functions otherwise, other than they are targeting that type they are being applied to. We can therefore use parameters and default parameters.
 
-```Kotlin
+```kotlin
+package com.oreilly
+\npackage com.oreilly
+\r\npackage com.oreilly
+
 import java.time.DayOfWeek
 import java.time.LocalDate
 
@@ -63,6 +69,8 @@ fun LocalDate.startOfWeek(startDayOfWeek: DayOfWeek = DayOfWeek.MONDAY) = (0..6)
 If your extension function takes arguments or could take arguments, you should keep it a function. But if you never foresee needing any arguments, you can use an extension property instead. Below, we make `startOfWeek` an extension property that will always be starting on Monday.
 
 ```kotlin
+package com.oreilly
+
 import java.time.DayOfWeek
 import java.time.LocalDate
 
@@ -90,6 +98,8 @@ You can leverage operator symbols and to some degree custom symbols to create mo
 For instance, you cannot add an Integer to a `LocalDate` object to add that many days to it. But if you use the operator `plus()` function, you can achieve this.
 
 ```kotlin
+package com.oreilly
+
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
@@ -138,6 +148,8 @@ A cool feature that you can leverage with Kotlin are DSL's (domain specific lang
 Below is a DSL to build the inputs for a hotel pricing model.
 
 ```kotlin
+package com.oreilly
+
 import java.math.BigDecimal
 
 fun main(args: Array<String>) {
@@ -165,6 +177,7 @@ fun main(args: Array<String>) {
 And here is the backing implementation. We are using a special lambda type called a receiver function, which is a lambda that targets a "receiving object". For instance `PriceBuilder.() -> Unit` is a parameterless function that targets actions against a `PriceBuilder`. The function will have a `this` scope against the `PriceBuilder`.
 
 ```kotlin
+package com.oreilly
 
 fun hotel(op: HotelBuilder.() -> Unit): HotelBuilder {
     val newHotelModel = HotelBuilder()

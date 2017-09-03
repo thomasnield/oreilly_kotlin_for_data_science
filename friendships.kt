@@ -2,11 +2,11 @@
 
 fun main(args: Array<String>) {
 
-    //Retrieve users "John" and "Scott"
+    //Retrieve users "John" and "Billy"
     val user1 = users.first { it.firstName == "John" }
     val user2 = users.first { it.firstName == "Billy" }
 
-    // find mutual friends between "John" and "Scott"
+    // find mutual friends between "John" and "Billy"
     user1.mutualFriendsOf(user2)
             .forEach { println(it) }
 

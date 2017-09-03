@@ -7,6 +7,8 @@ Let's write our first Kotlin application. Right-click the `src/main/kotlin` fold
 In the "Launcher" file, add the following snippit:
 
 ```kotlin
+package com.oreilly
+
 fun main(args: Array<String>) {
 
 }
@@ -17,6 +19,8 @@ What we just added is the `main()` function, which is an entry-point to a Kotlin
 We'll start with the obligatory "Hello World", and use `println()` to write it in the console. To run the application, click the Kotlin icon in the gutter.
 
 ```kotlin
+package com.oreilly
+
 fun main(args: Array<String>) {
 
     println("Hello World!")
@@ -32,6 +36,8 @@ Variables in Kotlin are declared with the `val` or `var` keywords.
 Below, we declare two `Int` variables, `x` and `y`. We create a third `Int` variable called `sum` which is the sum of the two.
 
 ```kotlin
+package com.oreilly
+
 fun main(args: Array<String>) {
 
     val x = 10
@@ -51,6 +57,9 @@ We can also explicitly declare them as `Int` values like this, although it is no
 
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val x: Int = 10
@@ -69,6 +78,9 @@ The `val` means you cannot reassign a value to the variable.  For instance, you 
 
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val x = 10
@@ -89,6 +101,9 @@ If you do want variables to "mutate", or change value, use the `var` keyword ins
 
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     var x = 10
@@ -114,6 +129,9 @@ For instance, if you have declared a `myNumber` variable to be a number, you can
 ## 3.3A - Type safety
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     var myNumber = 10
@@ -134,6 +152,9 @@ Below, we get today's date, print it, then create another date off it that is 30
 
 
 ```kotlin
+package com.oreilly
+
+
 import java.time.LocalDate
 
 fun main(args: Array<String>) {
@@ -156,6 +177,9 @@ Note that the `LocalDate` is immutable, and the `plusDays()` function will creat
 Here is an example that works with money, which you often want to use the `BigDecimal` type for (for more accurate division and multiplication). You can create a `BigDecimal` off a `Double` or other numeric types using its `valueOf()` factory function.
 
 ```kotlin
+package com.oreilly
+
+
 import java.math.BigDecimal
 
 fun main(args: Array<String>) {
@@ -172,6 +196,8 @@ fun main(args: Array<String>) {
 Note above how we can inject a value into a `String` to be printed by using a `$` within a literal String. This is called interpolation. You can also inject an entire expression in a string like this.
 
 ```kotlin
+package com.oreilly
+
 import java.math.BigDecimal
 
 fun main(args: Array<String>) {
@@ -194,6 +220,8 @@ For instance, the equality operator checks if two items are equal, and will retu
 
 
 ```kotlin
+package com.oreilly
+
 import java.time.LocalDate
 
 fun main(args: Array<String>) {
@@ -211,6 +239,8 @@ Comparative operators check if one item is less than (or equal to) or greater th
 
 
 ```kotlin
+package com.oreilly
+
 import java.time.LocalDate
 
 fun main(args: Array<String>) {
@@ -238,6 +268,8 @@ To declare a function, you specify it with the `fun` keyword, followed by the fu
 Here we create a simple function that prints a random `Int`. It accepts no arguments and returns a `Unit`, which effectively means it returns nothing.
 
 ```kotlin
+package com.oreilly
+
 import java.util.concurrent.ThreadLocalRandom
 
 fun main(args: Array<String>) {
@@ -257,6 +289,8 @@ If your function is going to return a meaningful value, you will need to specify
 
 
 ```kotlin
+package com.oreilly
+
 import java.util.concurrent.ThreadLocalRandom
 
 fun main(args: Array<String>) {
@@ -273,6 +307,8 @@ fun generateRandomInt(): Int {
 The function above only has one line in its body, so we can actually use a simpler syntax using an `=`. We can even remove the return type which it will infer.
 
 ```kotlin
+package com.oreilly
+
 import java.util.concurrent.ThreadLocalRandom
 
 fun main(args: Array<String>) {
@@ -287,6 +323,8 @@ fun generateRandomInt() = ThreadLocalRandom.current().nextInt()
 We can also provide parameters to a function, like a `min` and `max` for our random function. These have to be declared with specified types, which in this case both will be `Int`.
 
 ```kotlin
+package com.oreilly
+
 import java.util.concurrent.ThreadLocalRandom
 
 fun main(args: Array<String>) {
@@ -303,6 +341,8 @@ fun generateRandomInt(min: Int, max: Int) =
 You can also pass the parameters in any order by invoking them by name. This is encouraged to explicitly call out which parameters you are providing, and prevents mixing up arguments.
 
 ```kotlin
+package com.oreilly
+
 import java.util.concurrent.ThreadLocalRandom
 
 fun main(args: Array<String>) {
@@ -321,6 +361,8 @@ You can specify default values for parameters. You'll typically want these param
 For instance, we can make the `min` parameter default to `0`.
 
 ```kotlin
+package com.oreilly
+
 import java.util.concurrent.ThreadLocalRandom
 
 fun main(args: Array<String>) {
@@ -344,6 +386,8 @@ Before we start, note that when you assign a null value to variable (without exp
 ## 3.5A - Declaring a nullable type
 
 ```kotlin
+package com.oreilly
+
 fun main(args: Array<String>) {
 
     val myValue = null  //type is `Nothing`
@@ -353,6 +397,8 @@ fun main(args: Array<String>) {
 In this case, we would rather this `myValue`, even if it is null, be a `String`. However, if you explicitly make it an `String` type, it will throw a compile error.
 
 ```kotlin
+package com.oreilly
+
 fun main(args: Array<String>) {
 
     val myValue: String = null // error
@@ -362,6 +408,8 @@ fun main(args: Array<String>) {
 The compiler does not like indiscriminate null values, and explicitly expects you to declare items as "nullable" if they can be null. The way you do this is to make the type "nullable", and this can be done by following the type with a question mark `?`.
 
 ```kotlin
+package com.oreilly
+
 fun main(args: Array<String>) {
 
     val myValue: String? = null
@@ -375,6 +423,8 @@ Now the variable is nullable. Let's see what this means.
  Let's say we want to get the `length` of `myValue`. The problem is the value might be null, so calling its `length` property will throw a compile error. This is because the compiler is stopping us from a possible `NullPointerException`, and would like us to handle the possibility it is null before calling its `length`.
 
  ```kotlin
+package com.oreilly
+
  fun main(args: Array<String>) {
 
     val myValue: String? = null
@@ -388,6 +438,8 @@ Now the variable is nullable. Let's see what this means.
 One way we can solve this is to use an `if` expression (covered in more detail next section) to check if the `myValue` is null. This would satisfy the compiler.
 
 ```kotlin
+package com.oreilly
+
 fun main(args: Array<String>) {
 
     val myValue: String? = null
@@ -404,6 +456,8 @@ A more idiomatic way Kotlin handles null values though is using coalescing opera
 
 
 ```kotlin
+package com.oreilly
+
 fun main(args: Array<String>) {
 
     val myValue: String? = null
@@ -425,6 +479,8 @@ Below, we default our operation to a length of `0` if the expression yields a nu
 
 
 ```kotlin
+package com.oreilly
+
 fun main(args: Array<String>) {
 
     val myValue: String? = null
@@ -436,6 +492,8 @@ fun main(args: Array<String>) {
 ```
 
 ```kotlin
+package com.oreilly
+
 fun main(args: Array<String>) {
 
     val myValue: String? = "Foxtrot"
@@ -451,6 +509,8 @@ fun main(args: Array<String>) {
 The "Bang! Bang!" operator, unofficially known as the "hold my beer" operator, is a brute force way to treat a nullable type as no longer nullable. The problem is it will throw a null pointer exception if the value is indeed null.
 
 ```kotlin
+package com.oreilly
+
 
 fun main(args: Array<String>) {
 
@@ -464,6 +524,8 @@ fun main(args: Array<String>) {
 
 
 ```kotlin
+package com.oreilly
+
 
 fun main(args: Array<String>) {
 
@@ -478,6 +540,8 @@ fun main(args: Array<String>) {
 This is an operator you will want to avoid using because it is better to leverage the null safety that Kotlin offers, and choose more effective strategies to handle the null value. If you want to force a value to not be nullable anymore, you can throw an explicit Exception instead.
 
 ```kotlin
+package com.oreilly
+
 fun main(args: Array<String>) {
 
     val myValue: String? = "Foxtrot"

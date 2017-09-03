@@ -6,6 +6,8 @@ Reading a text file (that is under 2GB) is pretty simple in Kotlin.
 ## 1-1A: Reading a File
 
 ```kotlin
+package com.oreilly
+
 import java.io.File
 import java.time.LocalDate
 
@@ -27,6 +29,8 @@ fun main(args: Array<String>) {
 Of course, you can also use a `forEach()` with a lambda:
 
 ```kotlin
+package com.oreilly
+
 import java.io.File
 import java.time.LocalDate
 
@@ -45,7 +49,10 @@ fun main(args: Array<String>) {
 
 For files larger than 2GB, you may want to use a `BufferedReader` instead.
 
-```Kotlin
+```kotlin
+package com.oreilly
+
+
 import java.io.File
 import java.time.LocalDate
 
@@ -65,9 +72,10 @@ fun main(args: Array<String>) {
 We can turn each line of the file into an instance of a `CustomerOrder` data class.
 
 ```kotlin
+package com.oreilly
+
 import java.io.File
 import java.time.LocalDate
-
 
 fun main(args: Array<String>) {
 
@@ -106,7 +114,10 @@ This would be more efficient if we used Sequences (which effectively work like a
 
 You can also write to files. There are functional, advanced ways to express this in fewer lines, but here is the most basic way:
 
-```Kotlin
+```kotlin
+package com.oreilly
+
+
 import java.io.File
 import java.time.LocalDate
 
@@ -156,10 +167,11 @@ In this example, we are going to use SQLite. Add the following dependency to you
 Unfortunately,the Kotlin standard library has no streamlined utilities for JDBC so there are a few steps you will need to do. Of course, you can create your own extensions or use other Kotlin libraries, but here is the vanilla way to create a List of `CustomerOrder`s off a SQL query:
 
 
-```Kotlin
+```kotlin
+package com.oreilly
+
 import java.sql.DriverManager
 import java.time.LocalDate
-
 
 fun main(args: Array<String>) {
     val conn = DriverManager.getConnection("jdbc:sqlite:/home/thomas/Desktop/thunderbird_manufacturing.db")
@@ -200,6 +212,9 @@ To pass parameters to a query, use a `PreparedStatement` to safely inject them. 
 
 
 ```kotlin
+package com.oreilly
+
+
 import java.sql.DriverManager
 import java.time.LocalDate
 
@@ -251,6 +266,9 @@ Kotlin should be able to retrieve any remote resources using standard protocols.
 For instance, you can process an HTTP request fairly easily. Below, we read a Gist on GitHub containing a text file of the 50 U.S. states.
 
 ```kotlin
+package com.oreilly
+
+
 import java.net.URL
 
 fun main(args: Array<String>) {
@@ -269,6 +287,9 @@ Lazy properties are enabled by Kotlin's property delegation, which we will not d
 
 
 ```kotlin
+package com.oreilly
+
+
 import java.net.URL
 
 fun main(args: Array<String>) {

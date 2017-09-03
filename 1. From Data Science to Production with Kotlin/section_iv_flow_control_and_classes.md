@@ -15,6 +15,9 @@ The `if` expression should be fairly familiar. It will return a value or execute
 For example, we can print a message if a `currentSpeed` is greater than the `speedLimit`.
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val speedLimit = 65
@@ -31,6 +34,9 @@ fun main(args: Array<String>) {
 You can also add an `else` clause to execute an action if the condition is `false`.
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val speedLimit = 65
@@ -48,6 +54,9 @@ fun main(args: Array<String>) {
 If each branch is one line, you don't need curly brackets.
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val speedLimit = 65
@@ -65,6 +74,9 @@ fun main(args: Array<String>) {
 The `if` expression can actually return a value (in our earlier examples, it returned a `Unit`). This means you can save the result of an `if` expression and assign it to a variable.
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val distance = 150
@@ -85,6 +97,9 @@ fun main(args: Array<String>) {
 If you don't need multiple lines in a block, you can shorthand this in a single line without curly brackets `{ }`.
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val distance = 150
@@ -101,6 +116,9 @@ You can combine conditions using the "and" `&&` operator, which joins several co
 
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val isRain = true
@@ -117,6 +135,9 @@ fun main(args: Array<String>) {
 The double-pipe `||` serves as an `OR` operator, which joins several conditions and requires one of them to be `true` to yield `true`. Below, we check for any snowfall or sleet conditions. Note we group up the sleet conditons in paranthesis `( )` so there is no mixup between the `AND` and `OR`.
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val isRain = false
@@ -139,6 +160,9 @@ A `when` expression is a more flexible alternative to `if` that allows you to sp
 Below we map different conditions to different `println` actions (each which return `Unit`) to categorize a wind speed.
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     // solicit wind speed input
@@ -159,6 +183,9 @@ fun main(args: Array<String>) {
 We can also use a `when` to map each condition to a value, and save that resulting value to a variable.
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     // solicit wind speed input
@@ -182,6 +209,9 @@ fun main(args: Array<String>) {
 If you want to invalidate everything that falls to the `else` clause, you can have it throw an `Exception`. This is a good way to exhaustively define valid conditions, and throw an error for anything else.
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     // solicit wind speed input
@@ -213,6 +243,9 @@ A class is an entity that is used to create instances of objects, which can be u
 Note you can also provide the properties as named parameters, just like functions.
 
 ```kotlin
+package com.oreilly
+
+
 import java.time.LocalDate
 
 fun main(args: Array<String>) {
@@ -232,6 +265,9 @@ class Patient(val firstName: String, val lastName: String, val birthday: LocalDa
 It is possible to add functions to a class which can use the properties (or other code in your project) to produce helpful calculations. Below, we add a `getAge()` function to the `Patient` class which returns the patient's age.
 
 ```kotlin
+package com.oreilly
+
+
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
@@ -255,6 +291,9 @@ Everything we learned about functions from the last section can be applied to fu
 However, the above example could be improved by using a derived property instead. Functions are often used when you expect parameters could be provided. If we are simply calculating an attribute based on no parameters at all about the item, we can express a "derived property" like so:
 
 ```kotlin
+package com.oreilly
+
+
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
@@ -274,6 +313,9 @@ class Patient(val firstName: String, val lastName: String, val birthday: LocalDa
 `get()` will calculate the value every time it is called. If you omit the `get()` keyword, this will calculate and persist the value once. This can be good if the value is expensive to calculate, but then it takes up memory.
 
 ```kotlin
+package com.oreilly
+
+
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
@@ -297,6 +339,9 @@ When your class is often holding data (which is the case for our `Patient` class
 
 
 ```kotlin
+package com.oreilly
+
+
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
@@ -323,6 +368,9 @@ The `data class` sports the following features:
 Here is a demonstration of equality. Again, the properties in the primary constructor (where the provided properties are held) drive the data class features, including equality.
 
 ```kotlin
+package com.oreilly
+
+
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
@@ -350,6 +398,9 @@ Here is a demonstration of copying-and-modifying a `Patient`.
 
 
 ```kotlin
+package com.oreilly
+
+
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
@@ -376,6 +427,9 @@ This copy-and-modify patterns maintains immutability, which is preferable and ca
 Sometimes you may use an `init { }` block to further initialize your class with certain operations like loading data or performing validation. Below, we have a `Vehicle` class that needs either a `highwayMpg` or a `kilowattHours`, but it cannot be assigned both. We use the `init` block below to throw an error if these rules are broken.
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val firstVehicle = Vehicle("Tesla", "Model S", 2017, kilowattHours = 75)
@@ -408,6 +462,9 @@ Sometimes we want to only have a single instance of a given class and make it ea
 For instance, we may set universal arguments for some business parameters, like model constants. Here, we create a `ModelArguments` object that contains two mutable properties that can be reassigned at any time.
 
 ```kotlin
+package com.oreilly
+
+
 
 fun main(args: Array<String>) {
 
@@ -437,6 +494,9 @@ object ModelArguments {
 Enums are kind of like Singletons, but are restricted to a few specified instances rather than just one. They can be useful to define a type that only has a strict set of values. For example, instead of using a "MALE" and "FEMALE" as strings, you can make this an enum type instead that allows no other values (whereas Strings can allow any value).
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val patient = Patient(firstName = "John", lastName = "Mooney", gender = Gender.MALE)
@@ -459,6 +519,9 @@ enum class Gender {
 Enums can be much more complex and have abstract functions with different implementations, but we will keep enums simple for our purposes. Since enums are classes, we can specify properties for each instance. Below, we supply a "chromosomes" property which holds a `String` of "XX" or "XY" for `FEMALE` and `MALE` respectively.
 
 ```kotlin
+package com.oreilly
+
+
 fun main(args: Array<String>) {
 
     val patient = Patient(firstName = "John", lastName = "Mooney", gender = Gender.MALE)
