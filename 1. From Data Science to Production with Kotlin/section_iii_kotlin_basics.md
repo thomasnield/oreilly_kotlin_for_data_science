@@ -1,6 +1,6 @@
 # Section III: Kotlin Basics
 
-Let's write our first Kotlin application. Right-click the `src/main/kotlin` folder, click "New", and select "Kotlin file/class" to create a new Kotlin file. Call it "Launcher" or whatever you like. This file will serve as the entry point to launch our application.
+Let's write our first Kotlin application. Right-click the `src/main/kotlin` folder, click "New", and select "Kotlin file/class" to create a new Kotlin file (or just use the `hello.kt` file that was created with the archetype). Call it "Launcher" or whatever you like. This file will serve as the entry point to launch our application.
 
 ## 3.1 Hello World
 
@@ -560,3 +560,4 @@ Cover the following:
 * CTRL + Q to see object types
 * CTRL + B to jump to declaration
 * SHIFT + F6 to rename
+* Quick search and Maven pane

@@ -64,10 +64,8 @@ PART 2: Practical Data Modeling for Production, with Kotlin
 * Using Kotlin with Apache Spark
 * Using Kotlin-Statistics
 * Doing matrix math with ND4J (Java's NumPy)
-* Interactive visuals with TornadoFX
+* Interactive UI's with TornadoFX
 * Deploying your Kotlin project
 
 5) Going Forward
 * Furthering your knowledge of Kotlin and the JVM
-* Notable Kotlin/Java data science libraries
-* Getting connected with the Kotlin community

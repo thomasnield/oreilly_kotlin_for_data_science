@@ -1,6 +1,6 @@
 # IV. Practical Applications
 
-In this section, we will explore a number of applications of Kotlin for data science and data engineering tasks, and also apply our knowledge of Kotlin to streamline libraries for our purposes where it makes sense.
+In this section, we will explore a number of applications of Kotlin for data science and data engineering tasks. We will also apply our knowledge of Kotlin to streamline existing Java data science libraries.
 
 ## 6.1 Ranking Mutual Friends in a Social Network
 
@@ -27,7 +27,7 @@ data class SocialUser(
         val firstName: String,
         val lastName: String
 ) {
-    val friends get() = friendships.asSequence()
+    val friends get() = friecndships.asSequence()
             .filter { userId == it.first || userId == it.second }
             .flatMap { sequenceOf(it.first, it.second) }
             .filter { it != userId }
@@ -86,7 +86,7 @@ Above, we retrieve two users quickly using the `first()` operator, and then demo
 
 ## 6.2 Kotlin for Apache Spark
 
-To use Apache Spark with a minimal configuration, add the following dependency to your `pom.xml`.
+To use Apache Spark with Kotlin, add the following dependency to your `pom.xml`.
 
 ```xml
 <dependency>
@@ -98,7 +98,7 @@ To use Apache Spark with a minimal configuration, add the following dependency t
 
 ## 6.2A - Basic Spark Example
 
-Since Apache Spark is a JVM library, there is no special configuration you will need to get it up-and-running.
+Since Apache Spark is a JVM library, there is no special configuration you will need to get it up-and-running. Just be sure to use a `JavaSparkContext` which Kotlin is cross-compatible with, rather than the default Scala-based `SparkContext`.
 
 ```kotlin
 package com.oreilly
@@ -109,7 +109,7 @@ import org.apache.spark.api.java.JavaSparkContext
 fun main(args: Array<String>) {
 
     val conf = SparkConf()
-            .setMaster("local")
+            .setMaster("local") //use local machine as master
             .setAppName("Kotlin Spark Test")
 
     val sc = JavaSparkContext(conf)
@@ -131,7 +131,7 @@ fun main(args: Array<String>) {
 
 If you have embraced the content in this video series so far, you will likely be using classes often to keep your data structures organized and refactorable. The recommended way to "register" your classes with Apache Spark, so that they can be used across all nodes, is to use a modern serialization solution like Kryo. Add Kryo as a dependency like so:
 
-``xml
+```xml
 <dependency>
     <groupId>com.esotericsoftware</groupId>
     <artifactId>kryo</artifactId>
@@ -141,7 +141,7 @@ If you have embraced the content in this video series so far, you will likely be
 
 Since Apache Spark only recognizes Scala and Java classes, and not Kotlin ones, create a quick extension function to convert Kotlin classes to Java before registering them.
 
-```Kotlin
+```kotlin
 package com.oreilly
 
 import org.apache.spark.SparkConf
@@ -588,3 +588,42 @@ Amazing, right? You can read about the handful of common chart types that are av
 https://edvin.gitbooks.io/tornadofx-guide/content/8.%20Charts.html
 
 While Kotlin's static typing may reduce the amount of flexibility you have in dynamically pivoting and analyzing data, it gives you a lot more safety and control without slowing you down severely. And you can deploy TornadoFX applications safely in production.
+
+
+## 6.5 Deploying your Kotlin application
+
+To deploy your Kotlin application, you will likely deploy it as a JAR file. This JAR file can be used as a library/dependency in someone else's project. It can also be used as a standalone application, which in that case you have to specify the class holding your `main()` function or TornadoFX `App` instance.
+
+To create a single, self-contained JAR file with all dependencies packaged with it, use the Maven Shade plugin as specified below in your `pom.xml`.
+
+
+```xml
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-shade-plugin</artifactId>
+  <version>2.3</version>
+  <executions>
+     <!-- Run shade goal on package phase -->
+    <execution>
+  <phase>package</phase>
+  <goals>
+    <goal>shade</goal>
+  </goals>
+  <configuration>
+    <transformers>
+    <!-- add Main-Class to manifest file -->
+                            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+      <mainClass>com.oreilly.MyApp</mainClass>
+    </transformer>
+    </transformers>
+  </configuration>
+      </execution>
+  </executions>
+</plugin>
+```
+
+Bring up the Maven panel, and double-click the `package` task to generate a JAR file as shown below.
+
+![](http://i.imgur.com/9zXSJwz.png)
+
+This JAR file can be copied and used anywhere as long as it can connect to whatever data sources it needs to. Running the JAR file on any computer with Java 8 installed should launch the application.

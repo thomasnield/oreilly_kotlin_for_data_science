@@ -1,10 +1,10 @@
 # Section II: Functional Programming with Kotlin
 
-Kotlin has adopted several functional programming ideas from languages like C# and Scala, but streamlines and improves them in many practical ways.
+Kotlin has adopted several functional programming ideas from languages like C#, Scala and Groovy, but streamlines and improves them in many practical ways.
 
 ## 2.1 - Understanding Higher Order Functions
 
-We actually have used higher order functions already when using lambda arguments. The way y
+We actually have used higher order functions already when using lambda arguments. We will go into more depth in this section on how they work.
 
 ## 2.1A - A simple mapping function
 
@@ -12,8 +12,6 @@ We can use higher-order functions to turn a `String` somehow into a `Int`, but a
 
 ```kotlin
 package com.oreilly
-\npackage com.oreilly
-\r\npackage com.oreilly
 
 fun main(args: Array<String>) {
 
@@ -24,7 +22,7 @@ fun main(args: Array<String>) {
     println(length)
 }
 
-fun mapStringToInt(input: String, mapper: (String) -> Int) = mapper(input)ut)
+fun mapStringToInt(input: String, mapper: (String) -> Int) = mapper(input)
 ```
 ## 2.1B - Lambdas as last argument
 
@@ -32,8 +30,6 @@ If a lambda is the last argument, you can put it outside the rounded paranthesis
 
 ```kotlin
 package com.oreilly
-\npackage com.oreilly
-\r\npackage com.oreilly
 
 fun main(args: Array<String>) {
 
@@ -49,12 +45,10 @@ fun mapStringToInt(input: String, mapper: (String) -> Int) = mapper(input)
 
 ## 2.1C - Inlining Functions
 
-When passing lambda arguments, you can sometimes get greater efficiency by inlining functions. This basically means injecting the resulting bytecode of the lambda into its target, and therefore eliminating the lambda object upon compilation.
+When passing lambda arguments, you can sometimes get greater efficiency by inlining functions. This basically means injecting the resulting bytecode of the lambda into its target, and therefore eliminating the lambda object upon compilation which saves memory.
 
 ```kotlin
 package com.oreilly
-\npackage com.oreilly
-\r\npackage com.oreilly
 
 fun main(args: Array<String>)
     val myString = "Foxtrot"
@@ -76,11 +70,9 @@ https://kotlinlang.org/docs/reference/inline-functions.html
 
 There are other syntaxes you can use to define lambdas. The simplest one is the `it` keyword referring to the single paramter input, but there are times you need to be more explicit.
 
-```kotlin
-package com.oreilly
-\npackage com.oreilly
-\r\npackage com.oreilly
+Here are the different supported lambda syntaxes you can use:
 
+```kotlin
 val length = mapStringToInt(myString) { it.length }
 val length = mapStringToInt(myString) { s -> s.length }
 val length = mapStringToInt(myString) { s: String -> s.length }
@@ -93,8 +85,6 @@ If you have multiple parameters in your lambda, separate them by commas and use 
 
 ```kotlin
 package com.oreilly
-\npackage com.oreilly
-\r\npackage com.oreilly
 
 fun main(args: Array<String>) {
 
@@ -117,7 +107,7 @@ https://kotlinlang.org/docs/reference/lambdas.html
 
 ##  2.3 Generics
 
-If you want to support a lambda accepting any given type and/or return9ing any given type, you can leverage generics to increase flexiblity.
+If you want to support any given types with your functional arguments, you can leverage generics to increase flexiblity.
 
 ## 2.3A: A Generic Higher Order Function
 
@@ -127,8 +117,6 @@ Below, we take a `dateString` of `2017-01-01` and use a `mapString()` function t
 
 ```kotlin
 package com.oreilly
-\npackage com.oreilly
-\r\npackage com.oreilly
 
 import java.time.LocalDate
 
@@ -154,8 +142,6 @@ You can have multiple generic types for a given function as well. For instance, 
 
 ```kotlin
 package com.oreilly
-\npackage com.oreilly
-\r\npackage com.oreilly
 
 import java.time.LocalDate
 
@@ -193,7 +179,7 @@ To learn more about generics in depth, go to the Kotlin Reference:
 https://kotlinlang.org/docs/reference/generics.html
 
 
-## 2.4 Sequences
+## 2.4: Sequences
 
 Sometimes a chain of collection operators can expensively create intermediary collections. Therefore, in cases where multiple operations are being processed it can be better to use a `Sequence`. A `Sequence` is much like an assembly line processing one item downstream at a time.
 
@@ -203,14 +189,12 @@ https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.sequences/-sequence/index.ht
 
 If you really enjoy this style of programming where items are fluently processed in a pipeline, there are similar tools available such as Java 8 Streams (which support efficient parallelization) as well as RxJava Observables and Flowables (which are not only concurrent but handle both data and events).
 
-## 2.4A Sequence Example
+## 2.4A: Sequence Example
 
 A `Sequence` is lazy and does not execute until certain terminator operators are called (like `toList()`, `average()`, `count()`, etc).
 
 ```kotlin
 package com.oreilly
-\npackage com.oreilly
-\r\npackage com.oreilly
 
 fun main(args: Array<String>) {
 
@@ -224,16 +208,14 @@ fun main(args: Array<String>) {
 }
 ```
 
-## 2.4B Sequence Example with flatMap()
+## 2.4B: Sequence Example with flatMap()
 
-Pretty much any collection or Iterable type will have an `asSequence()` function that will iterate the elements as a `Sequence`. Some sources can only be iterated once. Others multiple times. You can also use `flatMap()` to turn an element into a `Sequence` of other elements, and merge all those resulting sequeneces together.
+Pretty much any collection or Iterable type will have an `asSequence()` function that will iterate the elements as a `Sequence`. Some sources can only be iterated once, while others can be iterated multiple times. You can also use `flatMap()` to turn an element into a `Sequence` of other elements, and merge all those resulting sequeneces together.
 
 Below, we take a `List<String>` and turn it into a `Sequence` that is turned into a `Sequence` of its letters, then we `distinct` them and collect them into another `List`.
 
 ```kotlin
 package com.oreilly
-\npackage com.oreilly
-\r\npackage com.oreilly
 
 fun main(args: Array<String>) {
 
@@ -250,7 +232,7 @@ fun main(args: Array<String>) {
 ```
 
 
-## 2.5 `let()` and `apply()`
+## 2.5: `let()` and `apply()`
 
 Kotlin has a few higher order functions available on every single type. Two we will cover are `let()` and `apply()`.
 
@@ -264,8 +246,6 @@ For instance, let's say you want to uppercase a `String` and then concatenate it
 
 ```kotlin
 package com.oreilly
-\npackage com.oreilly
-\r\npackage com.oreilly
 
 fun main(args: Array<String>) {
 
@@ -279,13 +259,11 @@ fun main(args: Array<String>) {
 }
 ```
 
-But if you use the `let()`, you can avoid that step of saving the `uppercased` variable, and instead immediately calling `let()` on the result of `uppercase()` to immediately transform it to something else.
+But if you use the `let()`, you can avoid that step of saving the `uppercased` variable, and instead immediately call `let()` on the result of `uppercase()` to immediately transform it to something else.
 
 
 ```kotlin
 package com.oreilly
-\npackage com.oreilly
-\r\npackage com.oreilly
 
 fun main(args: Array<String>) {
 
@@ -297,14 +275,12 @@ fun main(args: Array<String>) {
 }
 ```
 
-## 2.5B `let()` for quick printing
+## 2.5B: `let()` for quick printing
 
 You can also use `let()` to quickly print the result of a long chain of operations rather than saving the result to a variable and printing it.
 
 ```kotlin
 package com.oreilly
-\npackage com.oreilly
-\r\npackage com.oreilly
 
 fun main(args: Array<String>) {
 
@@ -321,18 +297,16 @@ fun main(args: Array<String>) {
 So in a nutshell, `let()` can help keep your code fluent and avoid creating several intermediary variables.
 
 
-## 2.5C `apply()`
+## 2.5C: `apply()`
 
-The `apply()` is kind of like `let()`, but it will refer to the object it is called on as `this` rather than `it`, making the lambda operate as if its inside that class.
+The `apply()` is kind of like `let()`, but it will refer to the object it is called on as `this` rather than `it`, making the lambda operate as if its inside that class. It will then return that same object.
 
-It can be helpful to declare an object but then immediately manipulate it, without breaking the declaration flow.
+It can be helpful to declare an object but then immediately manipulate it before saving it to a variable or property, without breaking the declaration flow.
 
 Below, we have two examples of `apply()`. The first `apply()` call will do further manipulations with the returned `LocalDate` before assigning it to the `todaysDate` variable. The second will construct a `MyProcess` instance but immediately call its `run()` function before assigning it to the `immediateProcess` variable.
 
 ```kotlin
 package com.oreilly
-\npackage com.oreilly
-\r\npackage com.oreilly
 
 import java.time.LocalDate
 import java.time.LocalTime
@@ -342,9 +316,6 @@ fun main(args: Array<String>) {
     val todaysDate = LocalDate.now().apply {
         //do stuff with LocalDate before assigning to todaysDate variable
         println("Constructed today's date, which is $month $dayOfMonth, $year")
-
-        val tomorrow = plusDays(1)
-        println("Tomorrow is ${tomorrow.month} ${tomorrow.dayOfMonth}, ${tomorrow.year}")
     }
 
     val immediateProcess = MyProcess().apply {
