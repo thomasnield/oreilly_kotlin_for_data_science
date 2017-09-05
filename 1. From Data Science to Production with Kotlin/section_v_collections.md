@@ -23,7 +23,7 @@ fun main(args: Array<String>) {
 }
 ```
 
-## 5.2B: Checking if a Value is in a Range
+## 5.1B: Checking if a Value is in a Range
 
 Below, we create a range with two dates, and use the `in` operator to see if it contains a certain date in that range.
 
@@ -42,7 +42,7 @@ fun main(args: Array<String>) {
 }
 ```
 
-## 5.3C: Closed Ranges
+## 5.1C: Closed Ranges
 
 Note that you cannot loop through a range of `LocalDate`, because it is a `Comparable` and therefore only works with `ClosedRange` rather than `IntRange` or other numeric ranges. We will learn how to iterate a series of dates in a range later.
 
@@ -497,9 +497,6 @@ For instance, we can have a `PatientDirectory` object embedded right inside the 
 
 ```kotlin
 package com.oreilly
-
-
-
 
 fun main(args: Array<String>) {
 

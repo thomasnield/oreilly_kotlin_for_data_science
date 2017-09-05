@@ -215,6 +215,7 @@ package com.oreilly
 fun main(args: Array<String>) {
 
     // solicit wind speed input
+    println("Input a wind speed")
     val windSpeed = readLine()?.toInt()?: throw Exception("Please provide a wind speed!")
 
     // evaluate wind speed category
@@ -286,7 +287,7 @@ class Patient(val firstName: String, val lastName: String, val birthday: LocalDa
 
 Everything we learned about functions from the last section can be applied to functions inside classes.
 
-## 4-3B: Putting Derived Properties in a class
+## 4-3C: Putting Derived Properties in a class
 
 However, the above example could be improved by using a derived property instead. Functions are often used when you expect parameters could be provided. If we are simply calculating an attribute based on no parameters at all about the item, we can express a "derived property" like so:
 
@@ -364,6 +365,8 @@ The `data class` sports the following features:
 * A `toString()` implementation that displays the contents of the object
 * A `copy()` function that allows you to create new objects off the old one, and change certain properties.
 * `componentN()` functions that numerically correspond to each property.
+
+Data classes are helpful for respresenting domain objects. Because of their concept of equality, they can be used as key objects for rapid lookups as well (covered later). They serve as a robust and clearer alternative to Tuples or Dicts. 
 
 Here is a demonstration of equality. Again, the properties in the primary constructor (where the provided properties are held) drive the data class features, including equality.
 

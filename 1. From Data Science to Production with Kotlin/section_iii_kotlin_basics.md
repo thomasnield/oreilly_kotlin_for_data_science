@@ -555,7 +555,7 @@ fun main(args: Array<String>) {
 # 3.6 Project Navigation and Organization
 
 Cover the following:
-
+* Version Control Tracking 
 * Files and packages
 * CTRL + Q to see object types
 * CTRL + B to jump to declaration
