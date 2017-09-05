@@ -201,7 +201,6 @@ fun main(args: Array<String>) {
     val codeWords = sequenceOf("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot")
 
     val averageLength = codeWords.map { it.length }
-            .distinct()
             .average()
 
     println(averageLength)

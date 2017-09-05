@@ -14,7 +14,7 @@ import java.time.LocalDate
 
 fun main(args: Array<String>) {
 
-    val lines = File("/home/thomas/Desktop/customer_orders.csv").readLines()
+    val lines = File("C:\\Users\\thoma\\Desktop\\customer_orders.csv").readLines()
 
     for (l in lines) {
         println(l)
@@ -37,7 +37,7 @@ import java.time.LocalDate
 
 fun main(args: Array<String>) {
 
-    val lines = File("/home/thomas/Desktop/customer_orders.csv").readLines()
+    val lines = File("C:\\Users\\thoma\\Desktop\\customer_orders.csv").readLines()
 
     lines.forEach {
         println(it)
@@ -59,7 +59,7 @@ import java.time.LocalDate
 
 fun main(args: Array<String>) {
 
-    val reader = File("/home/thomas/Desktop/customer_orders.csv").bufferedReader()
+    val reader = File("C:\\Users\\thoma\\Desktop\\customer_orders.csv").bufferedReader()
 
     reader.forEachLine {
         println(it)
@@ -79,7 +79,7 @@ import java.time.LocalDate
 
 fun main(args: Array<String>) {
 
-    val reader = File("/home/thomas/Desktop/customer_orders.csv").bufferedReader()
+    val reader = File("C:\\Users\\thoma\\Desktop\\customer_orders.csv").bufferedReader()
 
     val orders = reader.readLines()
             .drop(1)  //skip header line
@@ -124,7 +124,7 @@ import java.time.LocalDate
 
 fun main(args: Array<String>) {
 
-    val writer = File("/home/thomas/Desktop/output.csv").bufferedWriter()
+    val writer = File("C:\\Users\\thoma\\Desktop\\output.csv").bufferedWriter()
 
     val orders = listOf(
             CustomerOrder(2, 5, LocalDate.of(2017,1,1), 15, 110),
@@ -174,7 +174,7 @@ import java.sql.DriverManager
 import java.time.LocalDate
 
 fun main(args: Array<String>) {
-    val conn = DriverManager.getConnection("jdbc:sqlite:/home/thomas/Desktop/thunderbird_manufacturing.db")
+    val conn = DriverManager.getConnection("jdbc:sqlite:C:/Users/thoma/Desktop/thunderbird_manufacturing.db")
 
     val ps = conn.prepareStatement("SELECT * FROM CUSTOMER_ORDER")
     val rs = ps.executeQuery()
@@ -225,7 +225,7 @@ fun main(args: Array<String>) {
     orders.forEach { println(it) }
 }
 
-val conn = DriverManager.getConnection("jdbc:sqlite:/home/thomas/Desktop/thunderbird_manufacturing.db")
+val conn = DriverManager.getConnection("jdbc:sqlite:C:/Users/thoma/Desktop/thunderbird_manufacturing.db")
 
 fun ordersForCustomerId(customerId: Int): List<CustomerOrder> {
     val ps = conn.prepareStatement("SELECT * FROM CUSTOMER_ORDER WHERE CUSTOMER_ID = ?")
