@@ -142,7 +142,7 @@ fun main(args: Array<String>) {
             Vehicle("Toyota", "Camry", 2016, highwayMpg = 35)
     )
 
-    for ((car,index) in samples.withIndex()) {
+    for ((index,car) in samples.withIndex()) {
         println("Item at $index is $car")
     }
 }

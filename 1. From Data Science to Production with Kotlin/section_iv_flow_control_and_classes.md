@@ -366,7 +366,7 @@ The `data class` sports the following features:
 * A `copy()` function that allows you to create new objects off the old one, and change certain properties.
 * `componentN()` functions that numerically correspond to each property.
 
-Data classes are helpful for respresenting domain objects. Because of their concept of equality, they can be used as key objects for rapid lookups as well (covered later). They serve as a robust and clearer alternative to Tuples or Dicts. 
+Data classes are helpful for respresenting domain objects. Because of their concept of equality, they can be used as key objects for rapid lookups as well (covered later). They serve as a robust and clearer alternative to Tuples or Dicts.
 
 Here is a demonstration of equality. Again, the properties in the primary constructor (where the provided properties are held) drive the data class features, including equality.
 
