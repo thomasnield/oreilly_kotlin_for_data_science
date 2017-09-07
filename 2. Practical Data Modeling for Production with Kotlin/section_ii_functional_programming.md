@@ -50,7 +50,7 @@ When passing lambda arguments, you can sometimes get greater efficiency by inlin
 ```kotlin
 package com.oreilly
 
-fun main(args: Array<String>)
+fun main(args: Array<String>) {
     val myString = "Foxtrot"
 
     val length = mapStringToInt(myString) { it.length }

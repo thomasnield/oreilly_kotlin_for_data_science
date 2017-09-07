@@ -2,22 +2,19 @@
 
 In this section, we will explore a number of applications of Kotlin for data science and data engineering tasks. We will also apply our knowledge of Kotlin to streamline existing Java data science libraries.
 
-## 6.1 Ranking Mutual Friends in a Social Network
+## 4.1 Ranking Mutual Friends in a Social Network
 
 Here is an analytics task: take the existing friendship connections of a social network, and recommend new connections based on the number of mutual friends between people. With Kotlin, we can use a combination of object-oriented and functional programming to achieve this.
 
 ```kotlin
+package com.oreilly
+
 fun main(args: Array<String>) {
 
     //Retrieve users "John" and "Billy"
     val user1 = users.first { it.firstName == "John" }
-    val user2 = users.first { it.firstName == "Billy" }
 
-    // find mutual friends between "John" and "Scott"
-    user1.mutualFriendsOf(user2)
-            .forEach { println(it) }
-
-    //see recommended friends for John
+    //see recommended friends for Billy
     user1.recommendedFriends()
             .forEach { println(it) }
 }
@@ -27,7 +24,7 @@ data class SocialUser(
         val firstName: String,
         val lastName: String
 ) {
-    val friends get() = friecndships.asSequence()
+    val friends get() = friendships.asSequence()
             .filter { userId == it.first || userId == it.second }
             .flatMap { sequenceOf(it.first, it.second) }
             .filter { it != userId }
@@ -84,7 +81,7 @@ val friendships = listOf(
 Above, we retrieve two users quickly using the `first()` operator, and then demonstrate the mutual friends between them. Finally, we show friendship recommendations for "John" using a ranking of non-friends that he has mutual friendships with.
 
 
-## 6.2 Kotlin for Apache Spark
+## 4.2 Kotlin for Apache Spark
 
 To use Apache Spark with Kotlin, add the following dependency to your `pom.xml`.
 
@@ -96,7 +93,7 @@ To use Apache Spark with Kotlin, add the following dependency to your `pom.xml`.
 </dependency>
 ```
 
-## 6.2A - Basic Spark Example
+## 4.2A - Basic Spark Example
 
 Since Apache Spark is a JVM library, there is no special configuration you will need to get it up-and-running. Just be sure to use a `JavaSparkContext` which Kotlin is cross-compatible with, rather than the default Scala-based `SparkContext`.
 
@@ -127,7 +124,7 @@ fun main(args: Array<String>) {
 }
 ```
 
-## 6.2B - Registering Kotlin Classes to Spark
+## 4.2B - Registering Kotlin Classes to Spark
 
 If you have embraced the content in this video series so far, you will likely be using classes often to keep your data structures organized and refactorable. The recommended way to "register" your classes with Apache Spark, so that they can be used across all nodes, is to use a modern serialization solution like Kryo. Add Kryo as a dependency like so:
 
@@ -175,7 +172,7 @@ fun main(args: Array<String>) {
 fun SparkConf.registerKryoClasses(vararg args: KClass<*>) = registerKryoClasses(args.map { it.java }.toTypedArray())
 ```
 
-## 6.3 Using Kotlin Statistics
+## 4.3 Using Kotlin Statistics
 
 Bring in "Kotlin Statistics" as a dependency:
 
@@ -190,7 +187,7 @@ Bring in "Kotlin Statistics" as a dependency:
 Kotlin statistics is a a helpful library to do data analytics in a Kotlin-esque way, leveraging a combination of object-oriented and fluent functional programming.
 
 
-## 6.3A - Simple Reductions
+## 4.3A - Simple Reductions
 
 It has simple reduction operations such as standard deviations for an entire data set:
 
@@ -238,7 +235,7 @@ fun main(args: Array<String>) {
 }
 ```
 
-## 6.3B Slicing By Properties and Data classes
+## 4.3B Slicing By Properties and Data classes
 
 You can take most of the reduction metrics and use their `xxxBy()` counterparts to slice on an attribute, such as Gender.
 
@@ -273,7 +270,7 @@ fun main(args: Array<String>) {
 ```
 Of course, this data is a little to sparse for breaking up by gender and month.
 
-## 6.3C Getting Percentiles by Gender
+## 4.3C Getting Percentiles by Gender
 
 You can expressively use Kotlin's different features to manipulate data sets fluently. For instance, you can create a `wbccPercentileCountByGender()` extension function to get a series of percentiles by gender.
 
@@ -305,7 +302,7 @@ The patterns behind Kotlin-Statistics have a large amount of potential, and show
 https://github.com/thomasnield/kotlin-statistics
 
 
-## 6.4 Doing matrix math with ND4J
+## 4.4 Doing matrix math with ND4J
 
 ND4J is Java's NumPy, and officially has interfaces for Java, Scala, and Clojure. However, it works with Kotlin out-of-the-box as well. While it may not have convenient fluent interfaces that you hopefully have grown to like in Kotlin, you can easily create your own around it.
 
@@ -374,7 +371,7 @@ https://github.com/deeplearning4j/nd4j
 Another library of interest is Koma, which is a matrix library specifically for Kotlin:
 https://github.com/kyonifer/koma
 
-## 6.5 User Interfaces and Visualization with TornadoFX
+## 4.5 User Interfaces and Visualization with TornadoFX
 
 TornadoFX is a comprehensive user interface library for Kotlin built around JavaFX. User interfaces are traditionally messy to build, but TornadoFX streamlines and reduces the amount of effort significantly.
 
@@ -590,7 +587,7 @@ https://edvin.gitbooks.io/tornadofx-guide/content/8.%20Charts.html
 While Kotlin's static typing may reduce the amount of flexibility you have in dynamically pivoting and analyzing data, it gives you a lot more safety and control without slowing you down severely. And you can deploy TornadoFX applications safely in production.
 
 
-## 6.5 Deploying your Kotlin application
+## 4.6 Deploying your Kotlin application
 
 To deploy your Kotlin application, you will likely deploy it as a JAR file. This JAR file can be used as a library/dependency in someone else's project. It can also be used as a standalone application, which in that case you have to specify the class holding your `main()` function or TornadoFX `App` instance.
 
@@ -612,7 +609,7 @@ To create a single, self-contained JAR file with all dependencies packaged with 
   <configuration>
     <transformers>
     <!-- add Main-Class to manifest file -->
-                            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+      <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
       <mainClass>com.oreilly.MyApp</mainClass>
     </transformer>
     </transformers>

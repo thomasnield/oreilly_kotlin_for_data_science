@@ -9,7 +9,6 @@ Reading a text file (that is under 2GB) is pretty simple in Kotlin.
 package com.oreilly
 
 import java.io.File
-import java.time.LocalDate
 
 
 fun main(args: Array<String>) {
@@ -32,7 +31,6 @@ Of course, you can also use a `forEach()` with a lambda:
 package com.oreilly
 
 import java.io.File
-import java.time.LocalDate
 
 
 fun main(args: Array<String>) {
@@ -54,7 +52,6 @@ package com.oreilly
 
 
 import java.io.File
-import java.time.LocalDate
 
 
 fun main(args: Array<String>) {
@@ -150,7 +147,7 @@ data class CustomerOrder(
 ```
 
 
-## 1-3A: Reading a SQL Query
+## 1-2A: Reading a SQL Query
 
 To work with data sources, you typically use a JDBC connection (Java's standard way of connecting to a database). You will need to get the proper JDBC driver and bring it into your Maven dependencies.
 
@@ -205,7 +202,7 @@ data class CustomerOrder(
 )
 ```
 
-## 1-3B: Passing Parameters to a query
+## 1-2B: Passing Parameters to a query
 
 
 To pass parameters to a query, use a `PreparedStatement` to safely inject them. This will avoid inadvertent or malicious SQL injection.
@@ -259,7 +256,7 @@ data class CustomerOrder(
 )
 ```
 
-## 1-4A: Working with web requests
+## 1-3A: Working with web requests
 
 Kotlin should be able to retrieve any remote resources using standard protocols.
 
@@ -279,7 +276,7 @@ fun main(args: Array<String>) {
 }
 ```
 
-## 1-4B: Lazy Properties
+## 1-3B: Lazy Properties
 
 Sometimes it can be helpful to lazily initialize a property, especially for large expensive data sets. The benefit of lazy properties is they will not eagerly initialize when the containing Kotlin file is used. Rather, they will construct the moment that property is called.
 

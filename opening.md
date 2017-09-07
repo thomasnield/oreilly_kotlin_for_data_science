@@ -17,4 +17,4 @@ Data science is a broad buzzword that continues to put more disciplines under it
 
 In this class, we will leverage some of Kotlin's more advanced features to quickly express business logic on the data science domain, as well as look at practical applications towards analytics, statistics, ETL, matrix work, and machine learning.
 
-Let's move forward and get started.
+Let's begin.
